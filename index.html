@@ -4,13 +4,13 @@
 <head>
     <title>rohstoff</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="preload" href="/fonts/materialiconsoutlined-regular-webfont.woff2" as="font" type="font/woff2"
-        crossorigin />
-    <link rel="preload" href="/fonts/materialicons-regular-webfont.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/roboto-medium-webfont.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/roboto-regular-webfont.woff2" as="font" type="font/woff2" crossorigin />
+        crossorigin >
+    <link rel="preload" href="/fonts/materialicons-regular-webfont.woff2" as="font" type="font/woff2" crossorigin >
+    <link rel="preload" href="/fonts/roboto-medium-webfont.woff2" as="font" type="font/woff2" crossorigin >
+    <link rel="preload" href="/fonts/roboto-regular-webfont.woff2" as="font" type="font/woff2" crossorigin >
 
     <style>
         @font-face {
@@ -53,6 +53,7 @@
 
         const d = new BasicDialog({
             title: "Titel",
+            icon: "\ue88a",//String.fromCodePoint("0xe144"),
             buttonConfirm: new TextButton({ label: 'new', onclick: (e) => { d.hide() } }),
             buttonDismiss: new TextButton({ label: 'cancel', onclick: (e) => { d.hide() }, disabled: true }),
         })

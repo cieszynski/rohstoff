@@ -39,6 +39,15 @@ export class BasicDialog extends Component {
         font-weight: 400;
         font-size: 24rem;
     }
+
+    dialog.basic h1::before {
+        text-align: center;
+        content: attr(data-icon);
+        display: block;
+        font-family: "Icons-Outlined";
+        font-size: 24rem;
+        color: var(--color-secondary);
+    }
     
     dialog.basic footer { 
         display: flex;
@@ -81,6 +90,8 @@ export class BasicDialog extends Component {
     }
 
     set title(str) { this.node.firstElementChild.textContent = str; }
+
+    set icon(str) { this.node.firstElementChild.dataset.icon = str; }
 
     show() {
         this.node.showModal();
