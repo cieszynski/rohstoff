@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="preload" href="/fonts/materialiconsoutlined-regular-webfont.woff2" as="font" type="font/woff2"
-        crossorigin >
-    <link rel="preload" href="/fonts/materialicons-regular-webfont.woff2" as="font" type="font/woff2" crossorigin >
-    <link rel="preload" href="/fonts/roboto-medium-webfont.woff2" as="font" type="font/woff2" crossorigin >
-    <link rel="preload" href="/fonts/roboto-regular-webfont.woff2" as="font" type="font/woff2" crossorigin >
+        crossorigin>
+    <link rel="preload" href="/fonts/materialicons-regular-webfont.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/roboto-medium-webfont.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/roboto-regular-webfont.woff2" as="font" type="font/woff2" crossorigin>
 
     <style>
         @font-face {
@@ -49,13 +49,18 @@
     <script type="module">
         import { Element, App } from '/rohstoff/application.mjs'
         import { BasicDialog } from '/rohstoff/dialogs/basic.mjs'
+        import { Divider } from '/rohstoff/divider.mjs'
+        import { Progressbar } from '/rohstoff/progress/linear.mjs'
         import { TextButton, OutlinedButton, FilledTonalButton, FilledButton, ElevatedButton } from '/rohstoff/buttons/common.mjs'
 
+        const pb = new Progressbar({ value: .6})
         const d = new BasicDialog({
             title: "Titel",
             icon: "\ue88a",//String.fromCodePoint("0xe144"),
             buttonConfirm: new TextButton({ label: 'new', onclick: (e) => { d.hide() } }),
-            buttonDismiss: new TextButton({ label: 'cancel', onclick: (e) => { d.hide() }, disabled: true }),
+            buttonDismiss: new TextButton({ label: 'cancel', onclick: (e) => { pb.visible = false }, disabled: false }),
+            onbeforeshow: (e) => { pb.visible = true; pb.value = .1;console.log(e)},
+            child: new Divider()//pb
         })
 
         const b = new ElevatedButton({

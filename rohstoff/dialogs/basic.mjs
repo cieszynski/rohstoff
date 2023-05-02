@@ -5,7 +5,9 @@ export class BasicDialog extends Component {
 
     static #css = `
     dialog.basic {
-        margin: calc(50vh - var(--scrollHeight) / 2) auto auto auto;
+        margin: calc(50vh - var(--dialog-basic-scroll-height) / 2) auto auto auto;
+        background-color: rgba(var(--color-surface-container-high), 1);
+        color: rgba(var(--color-on-surface-variant), 1);
         min-width: 280rem;
         max-width: 560rem;
         padding: 24rem;
@@ -21,7 +23,7 @@ export class BasicDialog extends Component {
         top: 0;
         width: 100%;
         height: 100%;
-        background-color: white;
+        background-color: rgba(var(--color-surface-container-high), 1);
         pointer-events: none;
         font-size: 24rem;
     }
@@ -34,7 +36,7 @@ export class BasicDialog extends Component {
 
     dialog.basic h1 { 
         line-height: 32rem;
-        color: var(--color-on-surface);
+        color: rgba(var(--color-on-surface), 1);
         font-family: "Regular";
         font-weight: 400;
         font-size: 24rem;
@@ -46,7 +48,7 @@ export class BasicDialog extends Component {
         display: block;
         font-family: "Icons-Outlined";
         font-size: 24rem;
-        color: var(--color-secondary);
+        color: rgba(var(--color-secondary), 1);
     }
     
     dialog.basic footer { 
@@ -62,6 +64,7 @@ export class BasicDialog extends Component {
         super(properties, "beforeend", `
             <dialog class="basic">
                 <h1></h1>
+                <child></child>
                 <footer>
                 </footer>
             </dialog>
@@ -93,12 +96,15 @@ export class BasicDialog extends Component {
 
     set icon(str) { this.node.firstElementChild.dataset.icon = str; }
 
+    set child(elem) { this.node.children[1].replaceWith(elem.node); }
+
     show() {
+        this.onbeforeshow(this);
         this.node.showModal();
         if (!this.node.style.maxHeight) { /* Firefox Mobile Hack! */
             this.node.style.maxHeight = `${this.node.scrollHeight}rem`
         }
-        this.node.style.setProperty('--scrollHeight', `${this.node.scrollHeight}rem`);
+        this.node.style.setProperty('--dialog-basic-scroll-height', `${this.node.scrollHeight}rem`);
         this.node.animate([
             {
                 boxShadow: "0 0 0 100vmax rgba(0,0,0,0)",
@@ -115,7 +121,7 @@ export class BasicDialog extends Component {
             },
             {
                 boxShadow: "0 0 0 100vmax rgba(0,0,0,.32)",
-                height: "var(--scrollHeight)",
+                height: "var(--dialog-basic-scroll-height)",
                 transform: "translateY(0rem)",
                 opacity: 1
             }
@@ -123,14 +129,20 @@ export class BasicDialog extends Component {
             easing: "ease-out",
             duration: 400,
             fill: "forwards"
+        }).finished.then(() => {
+            this.onshow(this)
         });
     }
 
+    onbeforeshow(elem) { }
+    onshow(elem) { }
+
     hide() {
+        this.onbeforehide(this);
         this.node.animate([
             {
                 transform: "translateY(0rem)",
-                height: "var(--scrollHeight)",
+                height: "var(--dialog-basic-scroll-height)",
                 opacity: 1
             },
             {
@@ -143,7 +155,11 @@ export class BasicDialog extends Component {
             duration: 300,
             fill: "backwards"
         }).finished.then(() => {
+            this.onhide(this);
             this.node.close();
         })
     }
+
+    onbeforehide(elem) { }
+    onhide(elem) { }
 }

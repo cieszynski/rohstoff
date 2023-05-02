@@ -135,7 +135,11 @@ export class App extends Component {
             --color-tertiary-container: var(--color-dark-tertiary-container, 99, 59, 72);
             --color-surface: var(--color-dark-surface, 28, 27, 31);
             --color-surface-variant: var(--color-dark-surface-variant, 73,69,79);
-            --color-surface-container-highest: var(--color-dark-surface-container-highest, 73,69,79);
+            --color-surface-container-lowest: var(--color-dark-surface-container-lowest, 15, 14, 17);
+            --color-surface-container-low: var(--color-dark-surface-container-low, 28, 27, 30);
+            --color-surface-container: var(--color-surface-dark-container, 33, 31, 35);
+            --color-surface-container-high: var(--color-dark-surface-container-high, 43, 41, 45);
+            --color-surface-container-highest: var(--color-dark-surface-container-highest, 73, 69, 79);
             --color-background: var(--color-dark-background, 28, 27, 31);
             --color-error: var(--color-dark-error, 242, 184, 181);
             --color-error-container: var(--color-dark-error-container, 140, 29, 24);
@@ -145,7 +149,7 @@ export class App extends Component {
             --color-on-secondary-container: var(--color-dark-on-secondary-container, 232, 222, 248);
             --color-on-tertiary: var(--color-dark-on-tertiary, 73, 37, 50);
             --color-on-tertiary-container: var(--color-dark-on-tertiary-container, 255, 216, 228);
-            --color-on-surface: var(--color-dark-on-surface, 230,225,229);
+            --color-on-surface: var(--color-dark-on-surface, 230, 225, 229);
             --color-on-surface-variant: var(--color-dark-on-surface-variant, 202, 196, 208);
             --color-on-error: var(--color-dark-on-error, 96, 20, 16);
             --color-on-error-container: var(--color-dark-on-error-container, 249, 222, 220);
