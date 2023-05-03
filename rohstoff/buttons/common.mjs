@@ -3,11 +3,6 @@ import { Element } from '/rohstoff/application.mjs'
 class Button extends Element {
 
     static #css = `
-    button {
-        border: none;
-        background: none;
-    }
-
     button.common.elevated,
     button.common.filled,
     button.common.filled-tonal,
@@ -15,9 +10,11 @@ class Button extends Element {
     button.common.text {
         font: 500 14rem/1 Medium;
         padding: 10rem 24rem 10rem 0rem;
-        margin: 4rem;
+        /* margin: 4rem; */
         border-radius: 20rem;
         height: 40rem;
+        width: fit-content;
+        min-width: 48rem;
     }
 
     button.common.elevated::before,
@@ -29,7 +26,7 @@ class Button extends Element {
         padding: 11rem 8rem 11rem 16rem;
         vertical-align: text-bottom;
         content: attr(data-icon);
-    }
+    } /* CSS */
     `
 
     static { super.initonce(this.#css) }
@@ -43,6 +40,15 @@ class Button extends Element {
     set label(str) { this.node.textContent = str; }
 
     set disabled(bool) { this.node.disabled = bool; }
+
+    set icon(str) { this.node.dataset.icon = str; }
+
+    set responsive(bool) {
+        this.node.style.width = {
+            true: '100%',
+            false: 'fit-content'
+        }[bool];
+    }
 
     onclick(e) { console.log(e) }
 }

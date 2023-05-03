@@ -6,6 +6,7 @@ export class Divider extends Element {
     hr.divider {
         margin: 4rem auto;
         border: 1rem solid rgba(var(--color-outline-variant), 1);
+        width: 100%;
     }
     ` /* #css */
 

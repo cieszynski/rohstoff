@@ -1,6 +1,22 @@
 
-export class Component {
+class Base {
+
+    static initonce(css = "") {
+        (new CSSStyleSheet())
+            .replace(css)
+            .then((sheet) => {
+                document.adoptedStyleSheets[
+                    document.adoptedStyleSheets.length
+                ] = sheet;
+            });
+    }
+
+    set id(str) { this.node.id = str }
+}
+
+export class Component extends Base {
     constructor(properties, position, html) {
+        super();
         console.assert(["afterbegin", "beforeend"].includes(position));
 
         document.body.insertAdjacentHTML(
@@ -17,7 +33,7 @@ export class Component {
         Object.freeze(this);
     }
 
-    static initonce(css = "") {
+/*     static initonce(css = "") {
         (new CSSStyleSheet())
             .replace(css)
             .then((sheet) => {
@@ -27,14 +43,16 @@ export class Component {
             });
     }
 
-    set id(str) { this.node.id = str }
+    set id(str) { this.node.id = str } */
 
     set child(elem) { this.node.firstElementChild.replaceWith(elem.node); }
 }
 
-export class Element {
+export class Element extends Base {
 
     constructor(properties, ...elements) {
+        super();
+
         const create = (...elements) => {
             let node = null;
 
@@ -61,7 +79,7 @@ export class Element {
         Object.freeze(this);
     }
 
-    static initonce(css = "") {
+/*     static initonce(css = "") {
         (new CSSStyleSheet())
             .replace(css)
             .then((sheet) => {
@@ -71,7 +89,27 @@ export class Element {
             });
     }
 
+    set id(str) { this.node.id = str } */
+}
+
+export class Container extends Base {
+
+    constructor(properties, nodename='div') {
+        super();
+
+        this.node = document.createElement(nodename);
+
+        Object.assign(this, properties);
+        Object.freeze(this);
+    }
+
     set id(str) { this.node.id = str }
+
+    set children(arr) { 
+        this.node.replaceChildren(
+            ...arr.map(elem => elem.node)
+        );
+    }
 }
 
 export class App extends Component {
@@ -178,8 +216,17 @@ export class App extends Component {
         height: 100vh;
     }
 
+    button {
+        border: none;
+        background: none;
+    }
+
     html {
         font-size: 6.25%;
+    }
+
+    main {
+        height: 100%;
     }
     ` /* #css */
 

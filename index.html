@@ -51,7 +51,14 @@
         import { BasicDialog } from '/rohstoff/dialogs/basic.mjs'
         import { Divider } from '/rohstoff/divider.mjs'
         import { Progressbar } from '/rohstoff/progress/linear.mjs'
-        import { TextButton, OutlinedButton, FilledTonalButton, FilledButton, ElevatedButton } from '/rohstoff/buttons/common.mjs'
+        import { Row } from '/rohstoff/layouts/row.mjs'
+        import { 
+            TextButton, 
+            OutlinedButton, 
+            FilledTonalButton, 
+            FilledButton, 
+            ElevatedButton 
+        } from '/rohstoff/buttons/common.mjs'
 
         const pb = new Progressbar({ value: .6})
         const d = new BasicDialog({
@@ -64,13 +71,36 @@
         })
 
         const b = new ElevatedButton({
-            label: "Outlined",
+            label: "ElevatedButton",
+            responsive: true,
+            icon: "\ue88a",
             onclick: (e) => {
                 d.show()
             }
         })
         const app = new App({
-            child: b
+            child: new Row({
+                gap: 18,
+                align: {verticaly: 'center', horizontaly: 'center'},
+                children: [
+                    b,
+                    new TextButton({
+                        icon: "\ue88a",
+                        label: "TextButton"
+                    }), 
+                    new OutlinedButton({
+                        icon: "\ue88b",
+                        label: "OutlinedButton"
+                    }), 
+                    new FilledTonalButton({
+                        label: "FilledTonalButton"
+                    }), 
+                    new FilledButton({
+                        label: "FilledButton"
+                    }),
+                    new Divider()
+                ]
+            })
         })
     </script>
 </head>
