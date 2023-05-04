@@ -29,7 +29,18 @@ export class Component extends Base {
             "beforeend": document.body.lastElementChild
         }[position]
 
-        Object.assign(this, properties);
+        //Object.assign(this, properties);
+        Object
+            .entries(properties)
+            .sort(([, x], [, y]) => { 
+                return Array.isArray(x) 
+                    ? -1 
+                    : Array.isArray(y) 
+                        ? 1 
+                        : 0; 
+            }).forEach(([key, value])=>{
+            this[key] = value;
+        });
         Object.freeze(this);
     }
 
@@ -50,7 +61,7 @@ export class Component extends Base {
 
 export class Element extends Base {
 
-    constructor(properties, ...elements) {
+    constructor(properties={}, ...elements) {
         super();
 
         const create = (...elements) => {
@@ -75,7 +86,18 @@ export class Element extends Base {
 
         this.node = create(...elements);
 
-        Object.assign(this, properties);
+        //Object.assign(this, properties);
+        Object
+            .entries(properties)
+            .sort(([, x], [, y]) => { 
+                return Array.isArray(x) 
+                    ? -1 
+                    : Array.isArray(y) 
+                        ? 1 
+                        : 0; 
+            }).forEach(([key, value])=>{
+            this[key] = value;
+        });
         Object.freeze(this);
     }
 
@@ -99,7 +121,18 @@ export class Container extends Base {
 
         this.node = document.createElement(nodename);
 
-        Object.assign(this, properties);
+        //Object.assign(this, properties);
+        Object
+            .entries(properties)
+            .sort(([, x], [, y]) => { 
+                return Array.isArray(x) 
+                    ? -1 
+                    : Array.isArray(y) 
+                        ? 1 
+                        : 0; 
+            }).forEach(([key, value])=>{
+            this[key] = value;
+        });
         Object.freeze(this);
     }
 

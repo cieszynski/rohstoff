@@ -52,21 +52,25 @@
         import { Divider } from '/rohstoff/divider.mjs'
         import { Progressbar } from '/rohstoff/progress/linear.mjs'
         import { Row } from '/rohstoff/layouts/row.mjs'
-        import { 
-            TextButton, 
-            OutlinedButton, 
-            FilledTonalButton, 
-            FilledButton, 
-            ElevatedButton 
+        import {
+            TextButton,
+            OutlinedButton,
+            FilledTonalButton,
+            FilledButton,
+            ElevatedButton
         } from '/rohstoff/buttons/common.mjs'
+        import {
+            SegmentedButton,
+            ButtonSegment
+        } from '/rohstoff/buttons/segmented.mjs'
 
-        const pb = new Progressbar({ value: .6})
+        const pb = new Progressbar({ value: .6 })
         const d = new BasicDialog({
             title: "Titel",
             icon: "\ue88a",//String.fromCodePoint("0xe144"),
             buttonConfirm: new TextButton({ label: 'new', onclick: (e) => { d.hide() } }),
             buttonDismiss: new TextButton({ label: 'cancel', onclick: (e) => { pb.visible = false }, disabled: false }),
-            onbeforeshow: (e) => { pb.visible = true; pb.value = .1;console.log(e)},
+            onbeforeshow: (e) => { pb.visible = true; pb.value = .1; console.log(e) },
             child: new Divider()//pb
         })
 
@@ -81,24 +85,47 @@
         const app = new App({
             child: new Row({
                 gap: 18,
-                align: {verticaly: 'center', horizontaly: 'center'},
+                align: { verticaly: 'center', horizontaly: 'center' },
                 children: [
                     b,
                     new TextButton({
                         icon: "\ue88a",
                         label: "TextButton"
-                    }), 
+                    }),
                     new OutlinedButton({
                         icon: "\ue88b",
                         label: "OutlinedButton"
-                    }), 
+                    }),
                     new FilledTonalButton({
                         label: "FilledTonalButton"
-                    }), 
+                    }),
                     new FilledButton({
                         label: "FilledButton"
                     }),
-                    new Divider()
+                    new Divider(),
+                    new SegmentedButton({
+                        multiSelection: true,
+                        segments: [
+                            new ButtonSegment({
+                                icon: "\ue88a",
+                                label: 'Segment1',
+                                id: 's1'
+                            }),
+                            new ButtonSegment({
+                                onclick: (e) => { console.log(e.target) },
+                                icon: "\ue88b",
+                                label: 'Segment2',
+                                id: 's2'
+                            }),
+                            new ButtonSegment({
+                                icon: "\ue88d",
+                                label: 'Segment3',
+                                disabled: true,
+                                id: 's3'
+                            })
+                        ],
+                        description: 'a filter',
+                    })
                 ]
             })
         })
