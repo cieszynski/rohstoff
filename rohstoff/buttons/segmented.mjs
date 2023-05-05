@@ -5,9 +5,10 @@ export class SegmentedButton extends Element {
     static #css = `
     fieldset.segmented {
         border: none;
-        display: flex;
-        max-width: 450rem;
-        /* margin: auto; */
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 1fr;
+        max-width: fit-content;
     }
     
     fieldset.segmented legend {
@@ -24,22 +25,19 @@ export class SegmentedButton extends Element {
         align-items: center;
         position: relative;
         padding: 10rem 12rem;
-        float: left;
-        min-width: 1%;
-        text-align: center;
-        flex: 1;
         margin: 4rem 0 4rem -1rem;
     }
     
     fieldset.segmented label span {
         color: rgba(var(--color-on-surface), 1);
+        position: relative;
     }
     
     fieldset.segmented label input:checked+span {
         color: rgba(var(--color-on-secondary-container), 1);
     }
     
-    fieldset.segmented.icon-only label span {
+    fieldset.segmented.icons-only label span {
         visibility: hidden;
         position: absolute;
     }
@@ -50,7 +48,7 @@ export class SegmentedButton extends Element {
     
     fieldset.segmented label:last-of-type {
         margin-right: 4rem;
-        float: none;
+        /* float: none; */
     }
     
     fieldset.segmented label input {
@@ -65,7 +63,6 @@ export class SegmentedButton extends Element {
         position: absolute;
         content: "";
         border: 1rem solid rgba(var(--color-outline), 1);
-        z-index: -1;
     }
     
     fieldset.segmented label input:checked::before {
@@ -88,13 +85,13 @@ export class SegmentedButton extends Element {
         font-size: 18rem;
         line-height: 1;
         content: attr(data-icon);
-        padding: 0 .25em 0 0;
         vertical-align: text-bottom;
+        position: relative;
     }
     
     fieldset.segmented label input:checked::after {
         color: rgba(var(--color-on-secondary-container), 1);
-        content: "\\e5ca";
+        content: "\\e5ca\\2009"; /* check + thin space */
         /* checked */
     }
     
@@ -118,12 +115,12 @@ export class SegmentedButton extends Element {
     }
     
     /* FOCUSED */
-    fieldset.segmented label input::not(:disabled)active::before,
+    fieldset.segmented label input:not(:disabled)active::before,
     fieldset.segmented label input:focus::before {
         background-image: linear-gradient(rgba(var(--color-on-surface), .12) 0 100%);
     }
     
-    fieldset.segmented label input::not(:disabled)active:checked::before,
+    fieldset.segmented label input:not(:disabled)active:checked::before,
     fieldset.segmented label input:focus:checked::before {
         background-image: linear-gradient(rgba(var(--color-on-secondary-container), .12) 0 100%);
     }
@@ -153,6 +150,8 @@ export class SegmentedButton extends Element {
         );
     }
 
+    set iconsOnly(bool) { this.node.classList.toggle('icons-only', bool); }
+
     set multiSelection(bool) {
         this.node.querySelectorAll('input').forEach(node => {
             node.type = {
@@ -169,10 +168,10 @@ export class ButtonSegment extends Element {
         super(properties, 'label', 'input', 'span');
 
         this.node.firstElementChild.type = 'checkbox'
-        this.node.firstElementChild.onclick = this.onclick
+        this.node.firstElementChild.onclick = this.onclick;
     }
 
-    set icon(str) { this.node.firstElementChild.dataset.icon = str; }
+    set icon(str) { this.node.firstElementChild.dataset.icon = `${str}\u2009`; } /* icon + thin space */
 
     set label(str) { this.node.lastElementChild.textContent = str; }
 

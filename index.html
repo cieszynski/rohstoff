@@ -104,22 +104,47 @@
                     }),
                     new Divider(),
                     new SegmentedButton({
-                        multiSelection: true,
+                        multiSelection: false,
+                        iconsOnly: false,
                         segments: [
                             new ButtonSegment({
                                 icon: "\ue88a",
-                                label: 'Segment1',
+                                label: '€',
                                 id: 's1'
                             }),
                             new ButtonSegment({
                                 onclick: (e) => { console.log(e.target) },
                                 icon: "\ue88b",
-                                label: 'Segment2',
+                                label: 'bbbbbb',
                                 id: 's2'
                             }),
                             new ButtonSegment({
                                 icon: "\ue88d",
-                                label: 'Segment3',
+                                label: 'cc',
+                                disabled: true,
+                                id: 's3'
+                            })
+                        ],
+                        description: 'a filter',
+                    }),
+                    new SegmentedButton({
+                        multiSelection: true,
+                        iconsOnly: false,
+                        segments: [
+                            new ButtonSegment({
+                                /* icon: "\ue88a", */
+                                label: '€',
+                                id: 's1'
+                            }),
+                            new ButtonSegment({
+                                onclick: (e) => { console.log(this) },
+                                /* icon: "\ue88b", */
+                                label: '€€',
+                                id: 's2'
+                            }),
+                            new ButtonSegment({
+                                /* icon: "\ue88d", */
+                                label: '€€€',
                                 disabled: true,
                                 id: 's3'
                             })
