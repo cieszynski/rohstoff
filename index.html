@@ -58,11 +58,17 @@
             FilledTonalButton,
             FilledButton,
             ElevatedButton
-        } from '/rohstoff/buttons/common.mjs'
+        } from '/rohstoff/buttons/common.mjs';
         import {
             SegmentedButton,
             ButtonSegment
-        } from '/rohstoff/buttons/segmented.mjs'
+        } from '/rohstoff/buttons/segmented.mjs';
+        import {
+            OutlinedIconButton,
+            FilledTonalIconButton,
+            FilledIconButton,
+            IconButton,
+        } from '/rohstoff/buttons/icon.mjs';
 
         const pb = new Progressbar({ value: .6 })
         const d = new BasicDialog({
@@ -150,6 +156,43 @@
                             })
                         ],
                         description: 'a filter',
+                    }),
+                    new Divider(),
+                    new OutlinedIconButton({
+                        title: "OutlinedIconButton",
+                        icon: "\ue88d"
+                    }),
+                    new OutlinedIconButton({
+                        title: "OutlinedIconButton",
+                        icon: "\ue88d",
+                        toggle: true
+                    }),
+                    new FilledTonalIconButton({
+                        title: "FilledTonalIconButton",
+                        icon: "\ue88d"
+                    }),
+                    new FilledTonalIconButton({
+                        title: "FilledTonalIconButton",
+                        icon: "\ue88d",
+                        toggle: true
+                    }),
+                    new FilledIconButton({
+                        title: "FilledIconButton",
+                        icon: "\ue88d"
+                    }),
+                    new FilledIconButton({
+                        title: "FilledIconButton",
+                        icon: "\ue88d",
+                        toggle: true
+                    }),
+                    new IconButton({
+                        title: "IconButton",
+                        icon: "\ue88d"
+                    }),
+                    new IconButton({
+                        title: "ToggleIconButton",
+                        icon: "\ue88d",
+                        toggle: true
                     })
                 ]
             })

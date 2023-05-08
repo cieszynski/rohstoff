@@ -34,6 +34,7 @@ class Button extends Element {
     constructor(properties) {
         super(properties, "button")
 
+        this.node.type = 'button';
         this.node.onclick = this.onclick
     }
 

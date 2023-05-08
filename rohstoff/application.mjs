@@ -183,6 +183,7 @@ export class App extends Component {
         --color-on-tertiary-container: var(--color-light-on-tertiary-container, 55, 11, 30);
         --color-on-surface: var(--color-light-on-surface, 28, 27, 31);
         --color-on-surface-variant: var(--color-light-on-surface-variant, 73, 69, 78);
+        --color-on-inverse-surface: var(--color-light-on-inverse-surface, 244, 239, 244);
         --color-on-error: var(--color-light-on-error, 255, 255, 255);
         --color-on-error-container: var(--color-light-on-error-container, 65, 14, 11);
         --color-on-background: var(--color-light-on-background, 28, 27, 31);
@@ -191,7 +192,6 @@ export class App extends Component {
         --color-shadow: var(--color-light-shadow, 0, 0, 0);
         --color-surface-tint: var(--color-light-surface-tint, 103, 80, 164);
         --color-inverse-surface: var(--color-light-inverse-surface, 49, 48, 51);
-        --color-inverse-on-surface: var(--color-light-inverse-on-surface, 244, 239, 244);
         --color-inverse-primary: var(--color-light-inverse-primary, 208, 188, 255);
         --color-scrim: var(--color-light-scrim, 0, 0, 0);
     }
@@ -222,6 +222,7 @@ export class App extends Component {
             --color-on-tertiary-container: var(--color-dark-on-tertiary-container, 255, 216, 228);
             --color-on-surface: var(--color-dark-on-surface, 230, 225, 229);
             --color-on-surface-variant: var(--color-dark-on-surface-variant, 202, 196, 208);
+            --color-on-inverse-surface: var(--color-dark-on-inverse-surface, 49, 48, 51);
             --color-on-error: var(--color-dark-on-error, 96, 20, 16);
             --color-on-error-container: var(--color-dark-on-error-container, 249, 222, 220);
             --color-on-background: var(--color-dark-on-background, 230, 225, 229);
@@ -230,7 +231,6 @@ export class App extends Component {
             --color-shadow: var(--color-dark-shadow, 0, 0, 0);
             --color-surface-tint: var(--color-dark-surface-tint, 208, 188, 255);
             --color-inverse-surface: var(--color-dark-inverse-surface, 230, 225, 229);
-            --color-inverse-on-surface: var(--color-dark-inverse-on-surface, 49, 48, 51);
             --color-inverse-primary: var(--color-dark-inverse-primary, 103, 80, 164);
             --color-scrim: var(--color-dark-scrim, 0, 0, 0);
         }
