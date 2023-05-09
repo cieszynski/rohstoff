@@ -84,17 +84,26 @@ export class SegmentedButton extends Element {
         font-weight: 500;
         font-size: 18rem;
         line-height: 1;
-        content: attr(data-icon);
+        content: attr(data-icon)'\\2009'; /* icon + thin space */
         vertical-align: text-bottom;
         position: relative;
     }
     
+    fieldset.segmented.icons-only label input::after {
+        content: attr(data-icon);
+    }
+
     fieldset.segmented label input:checked::after {
         color: rgba(var(--color-on-secondary-container), 1);
         content: "\\e5ca\\2009"; /* check + thin space */
         /* checked */
     }
-    
+
+    fieldset.segmented.icons-only label input:checked::after {
+        content: "\\e5ca"; /* check w/o thin space */
+        /* checked */
+    }
+
     /* DISABLED */
     fieldset.segmented label input:disabled::before {
         border: 1rem solid rgba(var(--color-outline), .12);
@@ -171,7 +180,7 @@ export class ButtonSegment extends Element {
         this.node.firstElementChild.onclick = this.onclick;
     }
 
-    set icon(str) { this.node.firstElementChild.dataset.icon = `${str}\u2009`; } /* icon + thin space */
+    set icon(str) { this.node.firstElementChild.dataset.icon = str; } /* icon + thin space */
 
     set label(str) { this.node.lastElementChild.textContent = str; }
 

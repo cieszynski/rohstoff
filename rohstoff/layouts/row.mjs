@@ -7,6 +7,7 @@ export class Row extends Container {
         display: flex;
         flex-direction: column;
         height: 100%;
+        overflow-y: scroll;
     }
     ` /* #css */
 

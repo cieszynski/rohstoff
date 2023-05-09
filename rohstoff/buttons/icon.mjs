@@ -14,7 +14,7 @@ export class IconButton extends Element {
     button.icon::after {
         color: rgba(var(--color-on-surface-variant), 1);
         line-height: 1.6;
-        font-family: Icons;
+        font-family: Icons-Outlined;
         font-weight: 500;
         font-size: 24rem;
         content: attr(data-icon);
@@ -32,15 +32,6 @@ export class IconButton extends Element {
     button.icon:focus {
         background-image: linear-gradient(rgba(var(--color-on-surface-variant), .12) 0 100%);
     }
-
-    button.icon.toggle:not([aria-checked])::after, 
-    button.icon.toggle[aria-checked='false']::after {
-        font-family: Icons-Outlined;
-    }  
-
-    button.icon.toggle[aria-checked='true']::after {
-        font-family: Icons;
-    }
     `/* CSS */
 
     static { super.initonce(this.#css) }
@@ -50,26 +41,83 @@ export class IconButton extends Element {
 
         this.node.type = 'button';
         this.node.classList.add('icon');
-        this.node.onclick = (e) => {
-            if (this.node.classList.contains('toggle')) {
-                this.node.ariaChecked = {
-                    'false': 'true',
-                    'true': 'false',
-                    'undefined': 'false'
-                }[this.node.ariaChecked];
-            }
-            this.onclick;
-        }
+        this.node.onclick = this.onclick;
     }
+
+    set disabled(bool) { this.node.disabled = bool; }
 
     set icon(str) { this.node.dataset.icon = str; }
 
-    set title(str) { this.node.title = str; }
+    set label(str) { this.node.textContent = str; }
 
-    set toggle(bool) {
-        this.node.classList.add('toggle');
-        this.node.ariaChecked = 'false';
+    onclick(e) { console.log(e) }
+}
+
+export class ToggleIconButton extends Element {
+
+    static #css = `
+    label.icon span {
+        font-size: 0;
     }
+    
+    label.icon input {
+        appearance: none;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        border-radius: 20rem;
+    }
+
+    label.icon {
+        width: 40rem;
+        height: 40rem;
+        border-radius: 20rem;
+        margin: 4rem;
+        font-size: 0;
+    }
+    
+    label.icon input::after {
+        color: rgba(var(--color-on-surface-variant), 1);
+        line-height: 1.6;
+        font-family: Icons;
+        font-weight: 500;
+        font-size: 24rem;
+        content: attr(data-icon);
+    }
+
+    label.icon input:not(:checked,:disabled)::after {
+        font-family: Icons-Outlined;
+    }
+    
+    label.icon input:disabled::after {
+        color: rgba(var(--color-on-surface), .38);
+    }
+    
+    label.icon input:not(:disabled, :active):hover {
+        background-image: linear-gradient(rgba(var(--color-on-surface-variant), .08) 0 100%);
+    }
+    
+    label.icon input:not(:disabled):active,
+    label.icon input:focus {
+        background-image: linear-gradient(rgba(var(--color-on-surface-variant), .12) 0 100%);
+    }
+    `/* CSS */
+
+    static { super.initonce(this.#css) }
+
+    constructor(properties) {
+        super(properties, 'label', 'input', 'span');
+
+        this.node.firstElementChild.type = 'checkbox'
+        this.node.firstElementChild.onclick = this.onclick;
+        this.node.classList.add('icon');
+    }
+
+    set disabled(bool) { this.node.firstElementChild.disabled = bool; }
+
+    set label(str) { this.node.lastElementChild.textContent = str; }
+
+    set icon(str) { this.node.firstElementChild.dataset.icon = str; }
 
     onclick(e) { console.log(e) }
 }
@@ -86,7 +134,7 @@ export class OutlinedIconButton extends IconButton {
     }
     
     button.icon.outlined:disabled {
-        background-color: rgba(var(--color-on-surface), .12);
+        border: 1rem solid rgba(var(--color-on-surface), .12);
     }
     
     button.icon.outlined:disabled::after {
@@ -138,6 +186,50 @@ export class OutlinedIconButton extends IconButton {
     }
 }
 
+export class ToggleOutlinedIconButton extends ToggleIconButton {
+
+    static #css = `
+    label.icon.outlined input  {
+        border: 1rem solid rgba(var(--color-outline), 1);
+    }
+    
+    label.icon.outlined input {
+        color: rgba(var(--color-on-surface-variant), 1);
+    }
+    
+    label.icon.outlined input:disabled {
+        background-color: rgba(var(--color-on-surface), .12);
+        border: 0;
+    }
+    
+    label.icon.outlined input:disabled::after {
+        color: rgba(var(--color-on-surface), .38);
+    }
+
+    label.icon.outlined input:checked {
+        background-color: rgba(var(--color-inverse-surface), 1);
+    }
+
+    label.icon.outlined input:checked::after {
+        color: rgba(var(--color-on-inverse-surface), 1);
+    }
+
+    label.icon.outlined input:checked:active,
+    label.icon.outlined input:checked:focus,
+    label.icon.outlined input:checked:hover {
+        background-image: none;
+    }
+    ` /* CSS */
+
+    static { super.initonce(this.#css) }
+
+    constructor(properties) {
+        super(properties);
+
+        this.node.classList.add('outlined');
+    }
+}
+
 export class FilledTonalIconButton extends IconButton {
 
     static #css = `
@@ -174,12 +266,28 @@ export class FilledTonalIconButton extends IconButton {
     button.icon.filled-tonal:not(:disabled, :active):focus::after  {
         color: rgba(var(--color-on-secondary-container), 1);
     }
+    `/* CSS */
 
-    button.icon.filled-tonal.toggle[aria-checked='false'] {
-        background-color: rgba(var(--color-surface-container-highest), 1);
+    static { super.initonce(this.#css) }
+
+    constructor(properties) {
+        super(properties);
+
+        this.node.classList.add('filled-tonal');
+    }
+}
+
+
+export class ToggleFilledTonalIconButton extends ToggleIconButton {
+
+    static #css = `
+    label.icon.filled-tonal input {
+        background-color: rgba(var(--color-surface-variant), 1);
+        color: rgba(var(--color-on-surface-variant), 1);
     }
 
-    button.icon.filled-tonal.toggle[aria-checked='false']::after {
+    label.icon.filled-tonal input:checked {
+        background-color: rgba(var(--color-secondary-container), 1);
         color: rgba(var(--color-on-secondary-container), 1);
     }
     `/* CSS */
@@ -229,13 +337,33 @@ export class FilledIconButton extends IconButton {
     button.icon.filled:not(:disabled, :active):focus::after  {
         color: rgba(var(--color-on-primary), 1);
     }
+    `/* CSS */
+    static { super.initonce(this.#css) }
 
-    button.icon.filled.toggle[aria-checked='false'] {
-        background-color: rgba(var(--color-surface-container-highest), 1);
+    constructor(properties) {
+        super(properties);
+
+        this.node.classList.add('filled');
+    }
+}
+
+export class ToggleFilledIconButton extends ToggleIconButton {
+
+    static #css = `
+    label.icon.filled input {
+        background-color: rgba(var(--color-surface-variant), 1);
     }
 
-    button.icon.filled.toggle[aria-checked='false']::after {
+    label.icon.filled input::after {
         color: rgba(var(--color-primary), 1);
+    }
+
+    label.icon.filled input:checked {
+        background-color: rgba(var(--color-primary), 1);
+    }
+
+    label.icon.filled input:checked::after {
+        color: rgba(var(--color-on-primary), 1);
     }
     `/* CSS */
     static { super.initonce(this.#css) }

@@ -65,9 +65,13 @@
         } from '/rohstoff/buttons/segmented.mjs';
         import {
             OutlinedIconButton,
+            ToggleOutlinedIconButton,
             FilledTonalIconButton,
+            ToggleFilledTonalIconButton,
             FilledIconButton,
+            ToggleFilledIconButton,
             IconButton,
+            ToggleIconButton
         } from '/rohstoff/buttons/icon.mjs';
 
         const pb = new Progressbar({ value: .6 })
@@ -85,13 +89,13 @@
             responsive: true,
             icon: "\ue88a",
             onclick: (e) => {
-                d.show()
+                document.body.requestFullscreen()
             }
         })
         const app = new App({
             child: new Row({
                 gap: 18,
-                align: { verticaly: 'center', horizontaly: 'center' },
+                align: { /* verticaly: 'center', */ horizontaly: 'center' },
                 children: [
                     b,
                     new TextButton({
@@ -106,7 +110,10 @@
                         label: "FilledTonalButton"
                     }),
                     new FilledButton({
-                        label: "FilledButton"
+                        label: "FilledButton",
+                        onclick: (e) => {
+                            document.body.requestFullscreen()
+                        }
                     }),
                     new Divider(),
                     new SegmentedButton({
@@ -140,59 +147,83 @@
                             new ButtonSegment({
                                 /* icon: "\ue88a", */
                                 label: '€',
-                                id: 's1'
+                                id: 's11'
                             }),
                             new ButtonSegment({
                                 onclick: (e) => { console.log(this) },
                                 /* icon: "\ue88b", */
                                 label: '€€',
-                                id: 's2'
+                                id: 's21'
                             }),
                             new ButtonSegment({
                                 /* icon: "\ue88d", */
                                 label: '€€€',
                                 disabled: true,
-                                id: 's3'
+                                id: 's31'
+                            })
+                        ],
+                        description: 'a filter',
+                    }),
+                    new SegmentedButton({
+                        multiSelection: true,
+                        iconsOnly: true,
+                        segments: [
+                            new ButtonSegment({
+                                icon: "\ue88a",
+                                label: '€',
+                                id: 's12'
+                            }),
+                            new ButtonSegment({
+                                onclick: (e) => { console.log(this) },
+                                icon: "\ue88b",
+                                label: '€€',
+                                id: 's22'
+                            }),
+                            new ButtonSegment({
+                                icon: "\ue88d",
+                                label: '€€€',
+                                disabled: true,
+                                id: 's32'
                             })
                         ],
                         description: 'a filter',
                     }),
                     new Divider(),
                     new OutlinedIconButton({
-                        title: "OutlinedIconButton",
-                        icon: "\ue88d"
-                    }),
-                    new OutlinedIconButton({
-                        title: "OutlinedIconButton",
+                        label: "OutlinedIconButton",
                         icon: "\ue88d",
-                        toggle: true
+                        disabled: false
+                    }),
+                    new ToggleOutlinedIconButton({
+                        label: "ToggleOutlinedIconButton",
+                        icon: "\ue88d",
+                        disabled: false
                     }),
                     new FilledTonalIconButton({
-                        title: "FilledTonalIconButton",
+                        label: "FilledTonalIconButton",
                         icon: "\ue88d"
                     }),
-                    new FilledTonalIconButton({
-                        title: "FilledTonalIconButton",
-                        icon: "\ue88d",
-                        toggle: true
-                    }),
-                    new FilledIconButton({
-                        title: "FilledIconButton",
+                    new ToggleFilledTonalIconButton({
+                        label: "ToggleFilledTonalIconButton",
                         icon: "\ue88d"
                     }),
                     new FilledIconButton({
-                        title: "FilledIconButton",
-                        icon: "\ue88d",
-                        toggle: true
-                    }),
-                    new IconButton({
-                        title: "IconButton",
+                        label: "FilledIconButton",
                         icon: "\ue88d"
                     }),
-                    new IconButton({
-                        title: "ToggleIconButton",
+                    new ToggleFilledIconButton({
+                        label: "ToggleFilledIconButton",
                         icon: "\ue88d",
-                        toggle: true
+                    }),
+                    new IconButton({
+                        label: "IconButton",
+                        icon: "\ue88d",
+                        disabled: false
+                    }),
+                    new ToggleIconButton({
+                        label: "ToggleIconButton",
+                        icon: "\ue88d",
+                        disabled: false
                     })
                 ]
             })
