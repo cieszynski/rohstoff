@@ -52,6 +52,7 @@
         import { Divider } from '/rohstoff/divider.mjs'
         import { Progressbar } from '/rohstoff/progress/linear.mjs'
         import { Row } from '/rohstoff/layouts/row.mjs'
+        import { Column } from '/rohstoff/layouts/column.mjs'
         import {
             TextButton,
             OutlinedButton,
@@ -189,42 +190,122 @@
                         description: 'a filter',
                     }),
                     new Divider(),
-                    new OutlinedIconButton({
-                        label: "OutlinedIconButton",
-                        icon: "\ue88d",
-                        disabled: false
+                    new Column({
+                        children: [
+                            new IconButton({
+                                label: "IconButton",
+                                icon: "\ue88d",
+                                disabled: false
+                            }),
+                            new IconButton({
+                                label: "IconButton",
+                                icon: "\ue88d",
+                                disabled: true
+                            }),
+                            new ToggleIconButton({
+                                label: "ToggleIconButton",
+                                icon: "\ue88d",
+                                disabled: false
+                            }),
+                            new ToggleIconButton({
+                                label: "ToggleIconButton",
+                                icon: "\ue88d",
+                                disabled: true
+                            }),
+                            new ToggleIconButton({
+                                label: "ToggleIconButton",
+                                icon: "\ue88d",
+                                disabled: true,
+                                checked: true
+                            })
+                        ]
                     }),
-                    new ToggleOutlinedIconButton({
-                        label: "ToggleOutlinedIconButton",
-                        icon: "\ue88d",
-                        disabled: false
+                    new Column({
+                        children: [
+                            new OutlinedIconButton({
+                                label: "OutlinedIconButton",
+                                icon: "\ue88d",
+                                disabled: false
+                            }),
+                            new OutlinedIconButton({
+                                label: "OutlinedIconButton",
+                                icon: "\ue88d",
+                                disabled: true
+                            }),
+                            new ToggleOutlinedIconButton({
+                                label: "ToggleOutlinedIconButton",
+                                icon: "\ue88d",
+                                disabled: false
+                            }),
+                            new ToggleOutlinedIconButton({
+                                label: "ToggleOutlinedIconButton",
+                                icon: "\ue88d",
+                                disabled: true
+                            }),
+                            new ToggleOutlinedIconButton({
+                                label: "ToggleOutlinedIconButton",
+                                icon: "\ue88d",
+                                disabled: true,
+                                checked: true
+                            }),
+                        ]
                     }),
-                    new FilledTonalIconButton({
-                        label: "FilledTonalIconButton",
-                        icon: "\ue88d"
+                    new Column({
+                        children: [
+                            new FilledTonalIconButton({
+                                label: "FilledTonalIconButton",
+                                icon: "\ue88d"
+                            }),
+                            new FilledTonalIconButton({
+                                label: "FilledTonalIconButton",
+                                icon: "\ue88d",
+                                disabled: true
+                            }),
+                            new ToggleFilledTonalIconButton({
+                                label: "ToggleFilledTonalIconButton",
+                                icon: "\ue88d"
+                            }),
+                            new ToggleFilledTonalIconButton({
+                                label: "ToggleFilledTonalIconButton",
+                                icon: "\ue88d",
+                                disabled: true
+                            }),
+                            new ToggleFilledTonalIconButton({
+                                label: "ToggleFilledTonalIconButton",
+                                icon: "\ue88d",
+                                disabled: true,
+                                checked: true
+                            }),
+                        ]
                     }),
-                    new ToggleFilledTonalIconButton({
-                        label: "ToggleFilledTonalIconButton",
-                        icon: "\ue88d"
+                    new Column({
+                        children: [
+                            new FilledIconButton({
+                                label: "FilledIconButton",
+                                icon: "\ue88d"
+                            }),
+                            new FilledIconButton({
+                                label: "FilledIconButton",
+                                icon: "\ue88d",
+                                disabled: true,
+                            }),
+                            new ToggleFilledIconButton({
+                                label: "ToggleFilledIconButton",
+                                icon: "\ue88d",
+                            }),
+                            new ToggleFilledIconButton({
+                                label: "ToggleFilledIconButton",
+                                icon: "\ue88d",
+                                disabled: true,
+                            }),
+                            new ToggleFilledIconButton({
+                                label: "ToggleFilledIconButton",
+                                icon: "\ue88d",
+                                disabled: true,
+                                checked: true
+                            }),
+                        ]
                     }),
-                    new FilledIconButton({
-                        label: "FilledIconButton",
-                        icon: "\ue88d"
-                    }),
-                    new ToggleFilledIconButton({
-                        label: "ToggleFilledIconButton",
-                        icon: "\ue88d",
-                    }),
-                    new IconButton({
-                        label: "IconButton",
-                        icon: "\ue88d",
-                        disabled: false
-                    }),
-                    new ToggleIconButton({
-                        label: "ToggleIconButton",
-                        icon: "\ue88d",
-                        disabled: false
-                    })
                 ]
             })
         })

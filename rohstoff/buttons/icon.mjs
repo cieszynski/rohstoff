@@ -56,7 +56,11 @@ export class IconButton extends Element {
 export class ToggleIconButton extends Element {
 
     static #css = `
-    label.icon span {
+    label.icon {
+        width: 40rem;
+        height: 40rem;
+        border-radius: 20rem;
+        margin: 4rem;
         font-size: 0;
     }
     
@@ -67,39 +71,52 @@ export class ToggleIconButton extends Element {
         text-align: center;
         border-radius: 20rem;
     }
-
-    label.icon {
-        width: 40rem;
-        height: 40rem;
-        border-radius: 20rem;
-        margin: 4rem;
-        font-size: 0;
-    }
     
+    /* ICON */
     label.icon input::after {
         color: rgba(var(--color-on-surface-variant), 1);
+        font-family: Icons-Outlined;
+        content: attr(data-icon);
         line-height: 1.6;
-        font-family: Icons;
         font-weight: 500;
         font-size: 24rem;
-        content: attr(data-icon);
     }
 
-    label.icon input:not(:checked,:disabled)::after {
-        font-family: Icons-Outlined;
+    /* ICON checked */
+    label.icon input:checked::after {
+        color: rgba(var(--color-primary), 1);
+        font-family: Icons;
     }
     
+    /* ICON disabled */
     label.icon input:disabled::after {
         color: rgba(var(--color-on-surface), .38);
     }
     
+    /* CONTAINER hover */
     label.icon input:not(:disabled, :active):hover {
         background-image: linear-gradient(rgba(var(--color-on-surface-variant), .08) 0 100%);
     }
     
+    /* CONTAINER checked hover */
+    label.icon input:checked:not(:disabled, :active):hover {
+        background-image: linear-gradient(rgba(var(--color-primary), .08) 0 100%);
+    }
+    
+    /* CONTAINER active, focus */
     label.icon input:not(:disabled):active,
     label.icon input:focus {
         background-image: linear-gradient(rgba(var(--color-on-surface-variant), .12) 0 100%);
+    }
+    
+    /* CONTAINER checked active, focus */
+    label.icon input:checked:not(:disabled):active,
+    label.icon input:checked:focus {
+        background-image: linear-gradient(rgba(var(--color-primary), .12) 0 100%);
+    }
+    
+    label.icon span {
+        font-size: 0;
     }
     `/* CSS */
 
@@ -118,6 +135,9 @@ export class ToggleIconButton extends Element {
     set label(str) { this.node.lastElementChild.textContent = str; }
 
     set icon(str) { this.node.firstElementChild.dataset.icon = str; }
+
+    set checked (bool) { this.node.firstElementChild.checked = bool; }
+    get checked () { return this.node.firstElementChild.checked; }
 
     onclick(e) { console.log(e) }
 }
@@ -158,23 +178,6 @@ export class OutlinedIconButton extends IconButton {
     button.icon.outlined:not(:disabled, :active):focus::after  {
         color: rgba(var(--color-on-surface-variant), 1);
     }
-
-    button.icon.foutlined.toggle[aria-checked='false'] {
-        /* background-color: rgba(var(--color-on-surface-variant), 1); */
-    }
-
-    button.icon.outlined.toggle[aria-checked='false']::after {
-        color: rgba(var(--color-on-surface-variant), 1);
-    }
-
-    button.icon.outlined.toggle[aria-checked='true'] {
-        background-color: rgba(var(--color-inverse-surface), 1);
-        border-color: rgba(var(--color-inverse-surface), 1);
-    }
-
-    button.icon.outlined.toggle[aria-checked='true']::after {
-        color: rgba(var(--color-on-inverse-surface), 1);
-    }
     `/* CSS */
 
     static { super.initonce(this.#css) }
@@ -189,35 +192,64 @@ export class OutlinedIconButton extends IconButton {
 export class ToggleOutlinedIconButton extends ToggleIconButton {
 
     static #css = `
-    label.icon.outlined input  {
-        border: 1rem solid rgba(var(--color-outline), 1);
-    }
-    
-    label.icon.outlined input {
+    /* ICON */
+    label.icon.outlined input::after {
         color: rgba(var(--color-on-surface-variant), 1);
     }
-    
-    label.icon.outlined input:disabled {
-        background-color: rgba(var(--color-on-surface), .12);
-        border: 0;
-    }
-    
-    label.icon.outlined input:disabled::after {
-        color: rgba(var(--color-on-surface), .38);
-    }
 
-    label.icon.outlined input:checked {
-        background-color: rgba(var(--color-inverse-surface), 1);
-    }
-
+    /* ICON checked */
     label.icon.outlined input:checked::after {
         color: rgba(var(--color-on-inverse-surface), 1);
     }
 
+    /* ICON disabled */
+    label.icon.outlined input:disabled::after {
+        color: rgba(var(--color-on-surface), .38);
+    }
+
+    /* CONTAINER */
+    label.icon.outlined input {
+        border: 1rem solid rgba(var(--color-outline), 1);
+    }
+
+    /* CONTAINER checked */
+    label.icon.outlined input:checked {
+        background-color: rgba(var(--color-inverse-surface), 1);
+        border: 0;
+    }
+
+    /* CONTAINER hover */
+    label.icon.outlined input:not(:disabled, :active):hover {
+        background-image: linear-gradient(rgba(var(--color-on-surface-variant), .08) 0 100%);
+    }
+
+    /* CONTAINER checked hover */
+    label.icon.outlined input:checked:not(:disabled, :active):hover {
+        background-image: linear-gradient(rgba(var(--color-on-inverse-surface), .08) 0 100%);
+    }
+
+    /* CONTAINER active, focus */
+    label.icon.outlined input:active,
+    label.icon.outlined input:focus {
+        background-image: linear-gradient(rgba(var(--color-on-surface-variant), .12) 0 100%);
+    }
+
+    /* CONTAINER checked active, focus */
     label.icon.outlined input:checked:active,
-    label.icon.outlined input:checked:focus,
-    label.icon.outlined input:checked:hover {
-        background-image: none;
+    label.icon.outlined input:checked:focus {
+        background-image: linear-gradient(rgba(var(--color-on-inverse-surface), .12) 0 100%);
+    }
+
+    /* CONTAINER disabled */
+    label.icon.outlined input:disabled {
+        background-color: transparent;
+        border: 1rem solid rgba(var(--color-on-surface), .12);
+    }
+
+    /* CONTAINER disabled checked */
+    label.icon.outlined input:disabled:checked {
+        background-color: rgba(var(--color-on-surface), .12);
+        border: 0;
     }
     ` /* CSS */
 
@@ -281,14 +313,57 @@ export class FilledTonalIconButton extends IconButton {
 export class ToggleFilledTonalIconButton extends ToggleIconButton {
 
     static #css = `
-    label.icon.filled-tonal input {
-        background-color: rgba(var(--color-surface-variant), 1);
+    /* ICON */
+    label.icon.filled-tonal input::after {
         color: rgba(var(--color-on-surface-variant), 1);
     }
-
+    
+    /* ICON checked */
+    label.icon.filled-tonal input:checked::after {
+        color: rgba(var(--color-on-secondary-container), 1);
+    }
+    
+    /* ICON disabled */
+    label.icon.filled-tonal input:disabled::after {
+        color: rgba(var(--color-on-surface), .38);
+    }
+    
+    /* CONTAINER */
+    label.icon.filled-tonal input {
+        background-color: rgba(var(--color-surface-container-highest), 1);
+    }
+    
+    /* CONTAINER checked */
     label.icon.filled-tonal input:checked {
         background-color: rgba(var(--color-secondary-container), 1);
-        color: rgba(var(--color-on-secondary-container), 1);
+    }
+    
+    /* CONTAINER hover */
+    label.icon.filled-tonal input:not(:disabled):hover {
+        background-image: linear-gradient(rgba(var(--color-on-surface-variant), .08) 0 100%);
+    }
+    
+    /* CONTAINER checked hover */
+    label.icon.filled-tonal input:checked:not(:disabled):hover {
+        background-image: linear-gradient(rgba(var(--color-on-secondary-container), .08) 0 100%);
+    }
+    
+    /* CONTAINER active, focus */
+    label.icon.filled-tonal input:not(:disabled):active,
+    label.icon.filled-tonal input:not(:disabled):focus {
+        background-image: linear-gradient(rgba(var(--color-on-surface-variant), .12) 0 100%);
+    }
+    
+    /* CONTAINER checked active, focus */
+    label.icon.filled-tonal input:checked:not(:disabled):active,
+    label.icon.filled-tonal input:checked:not(:disabled):focus {
+        background-image: linear-gradient(rgba(var(--color-on-secondary-container), .12) 0 100%);
+    }
+    
+    /* CONTAINER disabled */
+    /* CONTAINER disabled checked */
+    label.icon.filled-tonal input:disabled {
+        background-color: rgba(var(--color-on-surface), .12);
     }
     `/* CSS */
 
@@ -350,20 +425,57 @@ export class FilledIconButton extends IconButton {
 export class ToggleFilledIconButton extends ToggleIconButton {
 
     static #css = `
-    label.icon.filled input {
-        background-color: rgba(var(--color-surface-variant), 1);
-    }
-
+    /* ICON */
     label.icon.filled input::after {
         color: rgba(var(--color-primary), 1);
     }
-
-    label.icon.filled input:checked {
-        background-color: rgba(var(--color-primary), 1);
-    }
-
+    
+    /* ICON checked */
     label.icon.filled input:checked::after {
         color: rgba(var(--color-on-primary), 1);
+    }
+    
+    /* ICON disabled */
+    label.icon.filled input:disabled::after {
+        color: rgba(var(--color-on-surface), .38);
+    }
+    
+    /* CONTAINER */
+    label.icon.filled input {
+        background-color: rgba(var(--color-surface-container-highest), 1);
+    }
+    
+    /* CONTAINER checked */
+    label.icon.filled input:checked:not(:disabled) {
+        background-color: rgba(var(--color-primary), 1);
+    }
+    
+    /* CONTAINER hover */
+    label.icon.filled input:not(:disabled):hover {
+        background-image: linear-gradient(rgba(var(--color-primary), .08) 0 100%);
+    }
+    
+    /* CONTAINER checked hover */
+    label.icon.filled input:checked:not(:disabled):hover {
+        background-image: linear-gradient(rgba(var(--color-on-primary), .08) 0 100%);
+    }
+    
+    /* CONTAINER active, focus */
+    label.icon.filled input:not(:disabled):active,
+    label.icon.filled input:not(:disabled):focus {
+        background-image: linear-gradient(rgba(var(--color-primary), .12) 0 100%);
+    }
+    
+    /* CONTAINER checked active, focus */
+    label.icon.filled input:checked:not(:disabled):active,
+    label.icon.filled input:checked:not(:disabled):focus {
+        background-image: linear-gradient(rgba(var(--color-on-primary), .12) 0 100%);
+    }
+    
+    /* CONTAINER disabled */
+    /* CONTAINER disabled checked */
+    label.icon.filled input:disabled {
+        background-color: rgba(var(--color-on-surface), .12);
     }
     `/* CSS */
     static { super.initonce(this.#css) }
