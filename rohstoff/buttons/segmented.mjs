@@ -31,6 +31,7 @@ export class SegmentedButton extends Element {
     fieldset.segmented label span {
         color: rgba(var(--color-on-surface), 1);
         position: relative;
+        pointer-events: none; /* prevent dead-zones when :hover */
     }
     
     fieldset.segmented label input:checked+span {
@@ -89,6 +90,12 @@ export class SegmentedButton extends Element {
         position: relative;
     }
     
+    /* without icon: add space to prevent width-jumping when selected */
+    fieldset.segmented label input:not(:checked, [data-icon])+span::before,
+    fieldset.segmented label input:not(:checked, [data-icon])+span::after {
+        content: "\\2009\\2008\\2008\\200A\\200A\\200A\\200A";
+    }
+
     fieldset.segmented.icons-only label input::after {
         content: attr(data-icon);
     }
@@ -103,6 +110,38 @@ export class SegmentedButton extends Element {
         content: "\\e5ca"; /* check w/o thin space */
         /* checked */
     }
+    
+    /* LABEL/ICON focus */
+    fieldset.segmented label input:focus+span {
+        color: rgba(var(--color-on-surface), 1);
+    }
+
+    /* LABEL/ICON focus checked */
+    fieldset.segmented label input:focus+span {
+        color: rgba(var(--color-on-secondary-container), 1);
+    }
+
+    /* CONTAINER hover */
+    fieldset.segmented label input:not(:disabled):hover::before {
+        background-image: linear-gradient(rgba(var(--color-on-surface), .08) 0 100%);
+    }
+
+    /* CONTAINER hover checked */
+    fieldset.segmented label input:checked:not(:disabled):hover::before {
+        background-image: linear-gradient(rgba(var(--color-on-secondary-container), .08) 0 100%);
+    }
+
+    /* CONTAINER active, focus */
+    fieldset.segmented label input:not(:disabled):active::before,
+    fieldset.segmented label input:not(:disabled):focus::before {
+        background-image: linear-gradient(rgba(var(--color-on-surface), .12) 0 100%);
+    }
+
+    /* CONTAINER active, focus checked */
+    fieldset.segmented label input:checked:not(:disabled):active::before,
+    fieldset.segmented label input:checked:not(:disabled):focus::before {
+        background-image: linear-gradient(rgba(var(--color-on-secondary-container), .12) 0 100%);
+    }
 
     /* DISABLED */
     fieldset.segmented label input:disabled::before {
@@ -112,26 +151,6 @@ export class SegmentedButton extends Element {
     fieldset.segmented label input:disabled+span,
     fieldset.segmented label input:disabled::after {
         color: rgba(var(--color-on-surface), .38);
-    }
-    
-    /* HOVERED */
-    fieldset.segmented label:hover input:not(:disabled,:active)::before {
-        background-image: linear-gradient(rgba(var(--color-on-surface), .08) 0 100%);
-    }
-    
-    fieldset.segmented label:hover input:not(:disabled,:active):checked::before {
-        background-image: linear-gradient(rgba(var(--color-on-secondary-container), .08) 0 100%);
-    }
-    
-    /* FOCUSED */
-    fieldset.segmented label input:not(:disabled)active::before,
-    fieldset.segmented label input:focus::before {
-        background-image: linear-gradient(rgba(var(--color-on-surface), .12) 0 100%);
-    }
-    
-    fieldset.segmented label input:not(:disabled)active:checked::before,
-    fieldset.segmented label input:focus:checked::before {
-        background-image: linear-gradient(rgba(var(--color-on-secondary-container), .12) 0 100%);
     }
     `/* CSS */
 
