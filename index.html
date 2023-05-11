@@ -53,6 +53,7 @@
         import { Progressbar } from '/rohstoff/progress/linear.mjs'
         import { Row } from '/rohstoff/layouts/row.mjs'
         import { Column } from '/rohstoff/layouts/column.mjs'
+        import { NavigationBar, NavigationItem } from '/rohstoff/navigation/navigationbar.mjs'
         import {
             TextButton,
             OutlinedButton,
@@ -75,6 +76,13 @@
             ToggleIconButton
         } from '/rohstoff/buttons/icon.mjs';
 
+        const xxx =
+            new NavigationItem({
+                label: "Home",
+                icon: "\ue88a",
+                checked: true
+            });
+
         const pb = new Progressbar({ value: .6 })
         const d = new BasicDialog({
             title: "Titel",
@@ -90,7 +98,7 @@
             responsive: true,
             icon: "\ue88a",
             onclick: (e) => {
-                document.body.requestFullscreen()
+                d.show()
             }
         })
         const app = new App({
@@ -98,6 +106,7 @@
                 gap: 18,
                 align: { /* verticaly: 'center', */ horizontaly: 'center' },
                 children: [
+                    xxx,
                     b,
                     new TextButton({
                         icon: "\ue88a",
@@ -309,6 +318,26 @@
                 ]
             })
         })
+
+
+        const navbar = new NavigationBar({
+            items: [
+                xxx,
+                new NavigationItem({
+                    label: "Home",
+                    icon: "\ue88a",
+                    checked: true
+                }),
+                new NavigationItem({
+                    label: "Start",
+                    icon: "\ue88d"
+                }),
+                new NavigationItem({
+                    label: "Info",
+                    icon: "\ue88e"
+                })
+            ]
+        });
     </script>
 </head>
 

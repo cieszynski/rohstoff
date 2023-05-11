@@ -194,6 +194,8 @@ export class App extends Component {
         --color-inverse-surface: var(--color-light-inverse-surface, 49, 48, 51);
         --color-inverse-primary: var(--color-light-inverse-primary, 208, 188, 255);
         --color-scrim: var(--color-light-scrim, 0, 0, 0);
+
+        --breakpoint-compact: (max-width: 600px);
     }
 
     @media (prefers-color-scheme: dark) {
@@ -249,6 +251,17 @@ export class App extends Component {
         height: 100%;
     }
 
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    @media only screen and (min-width: 600px) {
+        body {
+            flex-direction: row-reverse;
+        }
+    }
+
     button {
         border: none;
         background: none;
@@ -259,7 +272,8 @@ export class App extends Component {
     }
 
     main {
-        height: 100%;
+        overflow: auto;
+        flex: 1;
     }
     ` /* #css */
 

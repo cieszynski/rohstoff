@@ -6,7 +6,7 @@ export class Column extends Container {
     div.column {
         display: flex;
         flex-direction: row;
-        height: 100%;
+        height: fit-content;
     }
     ` /* #css */
 
