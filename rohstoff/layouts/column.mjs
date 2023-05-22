@@ -5,8 +5,9 @@ export class Column extends Container {
     static #css = `
     div.column {
         display: flex;
-        flex-direction: row;
-        height: fit-content;
+        flex-direction: column;
+        height: 100%;
+        overflow-y: auto;
     }
     ` /* #css */
 
@@ -19,4 +20,6 @@ export class Column extends Container {
 
         this.node.classList.add('column');
     }
+
+    set gap(num) { this.node.style.gap = `${num}rem`; }
 }

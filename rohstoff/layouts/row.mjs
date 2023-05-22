@@ -5,9 +5,8 @@ export class Row extends Container {
     static #css = `
     div.row {
         display: flex;
-        flex-direction: column;
-        height: 100%;
-        overflow-y: auto;
+        flex-direction: row;
+        height: fit-content;
     }
     ` /* #css */
 
@@ -21,7 +20,7 @@ export class Row extends Container {
         this.node.classList.add('row');
     }
 
-    set gap(num) { this.node.style.rowGap = `${num}rem`; }
+    set gap(num) { this.node.style.gap = `${num}rem`; }
 
     set align(obj) { Object.assign(this.align, obj) }
 

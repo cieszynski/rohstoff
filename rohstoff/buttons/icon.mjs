@@ -7,7 +7,7 @@ export class IconButton extends Element {
         width: 40rem;
         height: 40rem;
         border-radius: 20rem;
-        margin: 4rem;
+        /* margin: 4rem; */
         font-size: 0;
     }
     
@@ -60,7 +60,7 @@ export class ToggleIconButton extends Element {
         width: 40rem;
         height: 40rem;
         border-radius: 20rem;
-        margin: 4rem;
+       /*  margin: 4rem; */
         font-size: 0;
     }
     
@@ -169,13 +169,13 @@ export class OutlinedIconButton extends IconButton {
         color: rgba(var(--color-on-surface-variant), 1);
     }
     
-    button.icon.outlined:not(:disabled, :active):active, 
-    button.icon.outlined:not(:disabled, :active):focus {
+    button.icon.outlined:not(:disabled):active, 
+    button.icon.outlined:not(:disabled):focus {
         background-image: linear-gradient(rgba(var(--color-on-surface-variant), .12) 0 100%);
     }
     
-    button.icon.outlined:not(:disabled, :active):active::after, 
-    button.icon.outlined:not(:disabled, :active):focus::after  {
+    button.icon.outlined:not(:disabled):active::after, 
+    button.icon.outlined:not(:disabled):focus::after  {
         color: rgba(var(--color-on-surface-variant), 1);
     }
     `/* CSS */
@@ -229,14 +229,14 @@ export class ToggleOutlinedIconButton extends ToggleIconButton {
     }
 
     /* CONTAINER active, focus */
-    label.icon.outlined input:active,
-    label.icon.outlined input:focus {
+    label.icon.outlined input:not(:disabled):active,
+    label.icon.outlined input:not(:disabled):focus {
         background-image: linear-gradient(rgba(var(--color-on-surface-variant), .12) 0 100%);
     }
 
     /* CONTAINER checked active, focus */
-    label.icon.outlined input:checked:active,
-    label.icon.outlined input:checked:focus {
+    label.icon.outlined input:checked:not(:disabled):active,
+    label.icon.outlined input:checked:not(:disabled):focus {
         background-image: linear-gradient(rgba(var(--color-on-inverse-surface), .12) 0 100%);
     }
 

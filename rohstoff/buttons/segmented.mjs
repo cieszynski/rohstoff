@@ -44,11 +44,11 @@ export class SegmentedButton extends Element {
     }
     
     fieldset.segmented label:first-of-type {
-        margin-left: 4rem;
+        /* margin-left: 4rem; */
     }
     
     fieldset.segmented label:last-of-type {
-        margin-right: 4rem;
+        /* margin-right: 4rem; */
         /* float: none; */
     }
     

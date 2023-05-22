@@ -53,7 +53,7 @@
         import { Progressbar } from '/rohstoff/progress/linear.mjs'
         import { Row } from '/rohstoff/layouts/row.mjs'
         import { Column } from '/rohstoff/layouts/column.mjs'
-        import { NavigationBar, NavigationItem } from '/rohstoff/navigation/navigationbar.mjs'
+        import { NavigationBar, NavigationItem,NavigationDivider } from '/rohstoff/navigation/navigationbar.mjs'
         import {
             TextButton,
             OutlinedButton,
@@ -102,11 +102,10 @@
             }
         })
         const app = new App({
-            child: new Row({
+            child: new Column({
                 gap: 18,
-                align: { /* verticaly: 'center', */ horizontaly: 'center' },
+                align: { /* verticaly: 'center',  horizontaly: 'center' */ },
                 children: [
-                    xxx,
                     b,
                     new TextButton({
                         icon: "\ue88a",
@@ -199,7 +198,8 @@
                         description: 'a filter',
                     }),
                     new Divider(),
-                    new Column({
+                    new Row({
+                        gap: 8,
                         children: [
                             new IconButton({
                                 label: "IconButton",
@@ -229,7 +229,8 @@
                             })
                         ]
                     }),
-                    new Column({
+                    new Row({
+                        gap: 8,
                         children: [
                             new OutlinedIconButton({
                                 label: "OutlinedIconButton",
@@ -259,7 +260,8 @@
                             }),
                         ]
                     }),
-                    new Column({
+                    new Row({
+                        gap: 8,
                         children: [
                             new FilledTonalIconButton({
                                 label: "FilledTonalIconButton",
@@ -287,7 +289,8 @@
                             }),
                         ]
                     }),
-                    new Column({
+                    new Row({
+                        gap: 8,
                         children: [
                             new FilledIconButton({
                                 label: "FilledIconButton",
@@ -319,19 +322,26 @@
             })
         })
 
+        const navitem1 =
+            new NavigationItem({
+                label: "Homes",
+                icon: "\ue88a",
+                checked: true,
+                badge: true,
+                //onclick: (e)=>{navitem1.badge=false;navbar.withMenu=false}
+            })
 
         const navbar = new NavigationBar({
+            onclick: (e) => true,
+            withMenu: true,
             items: [
-                xxx,
-                new NavigationItem({
-                    label: "Home",
-                    icon: "\ue88a",
-                    checked: true
-                }),
+                navitem1,
                 new NavigationItem({
                     label: "Start",
-                    icon: "\ue88d"
+                    icon: "\ue88d",
+                    badge: '99+'
                 }),
+                new NavigationDivider(),
                 new NavigationItem({
                     label: "Info",
                     icon: "\ue88e"
