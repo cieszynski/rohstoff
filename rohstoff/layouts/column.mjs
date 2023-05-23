@@ -8,6 +8,7 @@ export class Column extends Container {
         flex-direction: column;
         height: 100%;
         overflow-y: auto;
+        position: relative;
     }
     ` /* #css */
 

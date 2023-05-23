@@ -1,6 +1,6 @@
 import { Element } from '/rohstoff/application.mjs'
 
-export class Progressbar extends Element {
+export class LinearProgressIndicator extends Element {
 
     static #css = `
     @keyframes indeterminate-progress-linear {

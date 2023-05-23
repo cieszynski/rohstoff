@@ -48,9 +48,10 @@
 
     <script type="module">
         import { Element, App } from '/rohstoff/application.mjs'
-        import { BasicDialog } from '/rohstoff/dialogs/basic.mjs'
+        import { BasicDialog } from '/rohstoff/containment/BasicDialog.mjs'
         import { Divider } from '/rohstoff/divider.mjs'
-        import { Progressbar } from '/rohstoff/progress/linear.mjs'
+        import { LinearProgressIndicator } from '/rohstoff/communication/LinearProgressIndicator.mjs'
+        import { Snackbar } from '/rohstoff/communication/Snackbar.mjs'
         import { Row } from '/rohstoff/layouts/row.mjs'
         import { Column } from '/rohstoff/layouts/column.mjs'
         import { NavigationBar, NavigationItem,NavigationDivider } from '/rohstoff/navigation/navigationbar.mjs'
@@ -60,11 +61,11 @@
             FilledTonalButton,
             FilledButton,
             ElevatedButton
-        } from '/rohstoff/buttons/common.mjs';
+        } from '/rohstoff/actions/CommonButtons.mjs';
         import {
             SegmentedButton,
             ButtonSegment
-        } from '/rohstoff/buttons/segmented.mjs';
+        } from '/rohstoff/actions/SegmentedButtons.mjs';
         import {
             OutlinedIconButton,
             ToggleOutlinedIconButton,
@@ -74,7 +75,12 @@
             ToggleFilledIconButton,
             IconButton,
             ToggleIconButton
-        } from '/rohstoff/buttons/icon.mjs';
+        } from '/rohstoff/actions/IconButtons.mjs';
+         
+        const sbar = new Snackbar({
+            text: "Ich bin die Snackbar. Ich bin die Snackbar. Ich bin die Snackbar.",
+            action: "los gehts"
+        })
 
         const xxx =
             new NavigationItem({
@@ -83,7 +89,7 @@
                 checked: true
             });
 
-        const pb = new Progressbar({ value: .6 })
+        const pb = new LinearProgressIndicator({ value: .6 })
         const d = new BasicDialog({
             title: "Titel",
             icon: "\ue88a",//String.fromCodePoint("0xe144"),
@@ -106,10 +112,14 @@
                 gap: 18,
                 align: { /* verticaly: 'center',  horizontaly: 'center' */ },
                 children: [
+                    sbar,
                     b,
                     new TextButton({
                         icon: "\ue88a",
-                        label: "TextButton"
+                        label: "TextButton",
+                        onclick: (e)=>{
+                            sbar.show(8000)
+                        }
                     }),
                     new OutlinedButton({
                         icon: "\ue88b",
@@ -345,7 +355,7 @@
                 new NavigationItem({
                     label: "Info",
                     icon: "\ue88e"
-                })
+                }),
             ]
         });
     </script>

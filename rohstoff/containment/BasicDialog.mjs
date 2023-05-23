@@ -1,5 +1,5 @@
 import { Component } from '/rohstoff/application.mjs'
-import { TextButton } from '/rohstoff/buttons/common.mjs'
+import { TextButton } from '/rohstoff/actions/CommonButtons.mjs'
 
 export class BasicDialog extends Component {
 
