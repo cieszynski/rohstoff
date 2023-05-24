@@ -1,4 +1,5 @@
 import {
+    App,
     Element,
     Component
 } from '/rohstoff/application.mjs'
@@ -16,7 +17,7 @@ export class NavigationBar extends Component {
     }
 
     /* NAVIGATION BAR */
-    @media screen and (max-width: 599px) {
+    @media screen and ${App.mediaQueryCompact} {
 
         nav.navigationbar {
             width: 100%;
@@ -35,7 +36,7 @@ export class NavigationBar extends Component {
     }
 
     /* NAVIGATION RAIL */
-    @media screen and (min-width: 600px) {
+    @media screen and ${App.mediaQueryNotCompact} {
 
         nav.navigationbar {
             position: relative;
@@ -63,7 +64,7 @@ export class NavigationBar extends Component {
     }
 
     /* NAVIGATION RAIL to DRAWER */
-    @media screen and (min-width: 600px) and (max-width: 1239px) {
+    @media screen and ${App.mediaQueryMedium} {
 
 /*         nav.navigationbar.menu div {
             border-radius: 0;
@@ -136,7 +137,7 @@ export class NavigationBar extends Component {
     }
 
     /* NAVIGATION DRAWER */
-    @media screen and (min-width: 1240px) {
+    @media screen and ${App.mediaQueryExpanded} {
 
         nav.navigationbar {
             width: 360rem;
@@ -315,7 +316,7 @@ export class NavigationItem extends Element {
     }
 
     /* NAVIGATION BAR */
-    @media screen and (max-width: 599px) {
+    @media screen and ${App.mediaQueryCompact} {
 
         label.navigation {
             min-width: 64rem;
@@ -333,7 +334,7 @@ export class NavigationItem extends Element {
     }
 
     /* NAVIGATION RAIL */
-    @media screen and (min-width: 600px) {
+    @media screen and ${App.mediaQueryNotCompact}  {
         label.navigation {
             height: 56rem;
         }
@@ -353,7 +354,7 @@ export class NavigationItem extends Element {
     }
 
     /* NAVIGATION RAIL to DRAWER */
-    @media screen and (min-width: 600px) and (max-width: 1239px) {
+    @media screen and ${App.mediaQueryMedium}  {
         .menu.opened label.navigation {
             flex-direction: row;
             align-items: center;
@@ -387,7 +388,7 @@ export class NavigationItem extends Element {
     }
 
     /* NAVIGATION DRAWER */
-    @media screen and (min-width: 1240px) {
+    @media screen and ${App.mediaQueryExpanded}  {
 
         label.navigation {
             flex-direction: row;
@@ -490,7 +491,7 @@ export class NavigationDivider extends Element {
     }
 
 
-    @media screen and (max-width: 599px) {
+    @media screen and ${App.mediaQueryCompact}  {
         hr.navigationdivider { 
             display: none;
         }

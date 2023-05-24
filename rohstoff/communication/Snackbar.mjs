@@ -1,4 +1,4 @@
-import { Element } from '/rohstoff/application.mjs'
+import { App, Element } from '/rohstoff/application.mjs'
 
 export class Snackbar extends Element {
 
@@ -58,17 +58,23 @@ export class Snackbar extends Element {
     show(ms = 4000) {
         if (this.node.open) { return; }
 
-        const redraw = (e) => {
-            this.node.style.top = this.node.parentNode.clientHeight - this.node.clientHeight+'px'
+        // placing the snackbar always at
+        // the bottom of the container
+        /* TODO: What about FAB? */
+        const reposition = (e) => {
+            this.node.style.bottom
+                = `${window.innerHeight - this.node.parentNode.offsetHeight + 16}rem`;
         }
-        /* TODO */
-        let portrait = window.matchMedia("(orientation: portrait)");
-        portrait.addEventListener("change", redraw);
+
+        App.observer.orientation.addEventListener("change", reposition);
+
         setTimeout(() => {
-            portrait.removeEventListener("change", redraw);
+            App.observer.orientation.removeEventListener("change", reposition);
             this.hide();
         }, ms)
-        redraw()
+
+        reposition()
+
         this.node.show();
         this.node.animate([
             { opacity: 0 },
@@ -85,7 +91,7 @@ export class Snackbar extends Element {
         this.node.getAnimations().forEach(animation => {
             animation.cancel();
         });
-        
+
         this.node.animate([
             { opacity: 1 },
             { opacity: 0 }

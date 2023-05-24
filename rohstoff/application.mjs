@@ -29,41 +29,31 @@ export class Component extends Base {
             "beforeend": document.body.lastElementChild
         }[position]
 
-        //Object.assign(this, properties);
+        // Ensure reading arrays first
         Object
             .entries(properties)
-            .sort(([, x], [, y]) => { 
-                return Array.isArray(x) 
-                    ? -1 
-                    : Array.isArray(y) 
-                        ? 1 
-                        : 0; 
-            }).forEach(([key, value])=>{
-            this[key] = value;
-        });
+            .sort(([, x], [, y]) => {
+                return Array.isArray(x)
+                    ? -1
+                    : Array.isArray(y)
+                        ? 1
+                        : 0;
+            }).forEach(([key, value]) => {
+                this[key] = value;
+            });
         Object.freeze(this);
     }
-
-/*     static initonce(css = "") {
-        (new CSSStyleSheet())
-            .replace(css)
-            .then((sheet) => {
-                document.adoptedStyleSheets[
-                    document.adoptedStyleSheets.length
-                ] = sheet;
-            });
-    }
-
-    set id(str) { this.node.id = str } */
 
     set child(elem) { this.node.firstElementChild.replaceWith(elem.node); }
 }
 
 export class Element extends Base {
 
-    constructor(properties={}, ...elements) {
+    constructor(properties = {}, ...elements) {
         super();
 
+        // build the dom part
+        // [root, child, child, [child, subchild, ...]]
         const create = (...elements) => {
             let node = null;
 
@@ -86,59 +76,47 @@ export class Element extends Base {
 
         this.node = create(...elements);
 
-        //Object.assign(this, properties);
+        // Ensure reading arrays first
         Object
             .entries(properties)
-            .sort(([, x], [, y]) => { 
-                return Array.isArray(x) 
-                    ? -1 
-                    : Array.isArray(y) 
-                        ? 1 
-                        : 0; 
-            }).forEach(([key, value])=>{
-            this[key] = value;
-        });
+            .sort(([, x], [, y]) => {
+                return Array.isArray(x)
+                    ? -1
+                    : Array.isArray(y)
+                        ? 1
+                        : 0;
+            }).forEach(([key, value]) => {
+                this[key] = value;
+            });
         Object.freeze(this);
     }
-
-/*     static initonce(css = "") {
-        (new CSSStyleSheet())
-            .replace(css)
-            .then((sheet) => {
-                document.adoptedStyleSheets[
-                    document.adoptedStyleSheets.length
-                ] = sheet;
-            });
-    }
-
-    set id(str) { this.node.id = str } */
 }
 
 export class Container extends Base {
 
-    constructor(properties, nodename='div') {
+    constructor(properties, nodename = 'div') {
         super();
 
         this.node = document.createElement(nodename);
 
-        //Object.assign(this, properties);
+        // Ensure reading arrays first
         Object
             .entries(properties)
-            .sort(([, x], [, y]) => { 
-                return Array.isArray(x) 
-                    ? -1 
-                    : Array.isArray(y) 
-                        ? 1 
-                        : 0; 
-            }).forEach(([key, value])=>{
-            this[key] = value;
-        });
+            .sort(([, x], [, y]) => {
+                return Array.isArray(x)
+                    ? -1
+                    : Array.isArray(y)
+                        ? 1
+                        : 0;
+            }).forEach(([key, value]) => {
+                this[key] = value;
+            });
         Object.freeze(this);
     }
 
     set id(str) { this.node.id = str }
 
-    set children(arr) { 
+    set children(arr) {
         this.node.replaceChildren(
             ...arr.map(elem => elem.node)
         );
@@ -146,6 +124,15 @@ export class Container extends Base {
 }
 
 export class App extends Component {
+
+    static mediaQueryCompact = window?.mediaQueryCompact
+        ?? "(max-width: 599px)"
+    static mediaQueryNotCompact = window?.mediaQueryNotCompact 
+        ?? "(min-width: 600px)"
+    static mediaQueryMedium = window?.mediaQueryMedium 
+        ?? "(min-width: 600px) and (max-width: 1239px)"
+    static mediaQueryExpanded = window?.mediaQueryExpanded 
+        ?? "(min-width: 1240px)"
 
     static #css = `
     *,
@@ -256,7 +243,7 @@ export class App extends Component {
         flex-direction: column;
     }
 
-    @media only screen and (min-width: 600px) {
+    @media only screen and ${App.mediaQueryNotCompact} {
         body {
             flex-direction: row-reverse;
         }
@@ -279,8 +266,15 @@ export class App extends Component {
 
     static { super.initonce(this.#css) }
 
-    constructor(properties) {
+    static observer = {
+        orientation: window.matchMedia('(orientation: landscape)'),
+        isCompact: window.matchMedia(App.mediaQueryCompact),
+        isNotCompact: window.matchMedia(App.mediaQueryNotCompact),
+        isMedium: window.matchMedia(App.mediaQueryMedium),
+        isExpanded: window.matchMedia(App.mediaQueryExpanded),
+    }
 
+    constructor(properties) {
         super(properties, "afterbegin", `<main><div/></main>`)
     }
 }
