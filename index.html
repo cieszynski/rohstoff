@@ -44,15 +44,28 @@
             src: local('sans-serif'), url("/fonts/roboto-medium-webfont.woff2") format('woff2');
             font-display: swap;
         }
+
+        #testid {
+            background-color: #fff;
+        }
     </style>
 
     <script>
         // example:
         var mediaQueryExpanded = "(min-width: 1240px)"
+        var breakpoints = {
+            compact: 550,
+            expanded: 1300
+        }
+        var i18n = {
+            close: 'schliessen'
+        }
     </script>
     <script type="module">
         import { App, Element } from '/rohstoff/application.mjs'        
         import { BasicDialog } from '/rohstoff/containment/BasicDialog.mjs'
+        import { FullScreenDialog } from '/rohstoff/containment/FullScreenDialog.mjs'
+        
         import { Divider } from '/rohstoff/divider.mjs'
         import { LinearProgressIndicator } from '/rohstoff/communication/LinearProgressIndicator.mjs'
         import { Snackbar } from '/rohstoff/communication/Snackbar.mjs'
@@ -81,6 +94,11 @@
             ToggleIconButton
         } from '/rohstoff/actions/IconButtons.mjs';
          
+        const fsd = new FullScreenDialog({
+            title: "Headline",
+            id: "testid"
+        })
+
         const sbar = new Snackbar({
             text: "Ich bin die Snackbar. Ich bin die Snackbar. Ich bin die Snackbar.",
             action: "los gehts"
@@ -120,14 +138,17 @@
                     b,
                     new TextButton({
                         icon: "\ue88a",
-                        label: "TextButton",
+                        label: "Snackbar",
                         onclick: (e)=>{
                             sbar.show(8000)
                         }
                     }),
                     new OutlinedButton({
                         icon: "\ue88b",
-                        label: "OutlinedButton"
+                        label: "FullScreenDialog",
+                        onclick: (e)=>{
+                            fsd.show()
+                        }
                     }),
                     new FilledTonalButton({
                         label: "FilledTonalButton"

@@ -486,16 +486,18 @@ export class NavigationDivider extends Element {
         opacity:1;
     }
 
-    .menu.closed div hr.navigationdivider {
-        opacity: 0; 
-    }
-
-
     @media screen and ${App.mediaQueryCompact}  {
         hr.navigationdivider { 
             display: none;
         }
     }
+
+    @media screen and ${App.mediaQueryMedium}  {
+        .menu.closed div hr.navigationdivider {
+            opacity: 0; 
+        }
+    }
+
     `
 
     static {

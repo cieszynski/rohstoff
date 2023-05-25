@@ -127,11 +127,11 @@ export class App extends Component {
 
     static mediaQueryCompact = window?.mediaQueryCompact
         ?? "(max-width: 599px)"
-    static mediaQueryNotCompact = window?.mediaQueryNotCompact 
+    static mediaQueryNotCompact = window?.mediaQueryNotCompact
         ?? "(min-width: 600px)"
-    static mediaQueryMedium = window?.mediaQueryMedium 
+    static mediaQueryMedium = window?.mediaQueryMedium
         ?? "(min-width: 600px) and (max-width: 1239px)"
-    static mediaQueryExpanded = window?.mediaQueryExpanded 
+    static mediaQueryExpanded = window?.mediaQueryExpanded
         ?? "(min-width: 1240px)"
 
     static #css = `
@@ -272,6 +272,11 @@ export class App extends Component {
         isNotCompact: window.matchMedia(App.mediaQueryNotCompact),
         isMedium: window.matchMedia(App.mediaQueryMedium),
         isExpanded: window.matchMedia(App.mediaQueryExpanded),
+
+        compact: window.matchMedia(
+            `(max-height: ${window?.breakpoints?.compact ?? 600}px) and (orientation: landscape),
+            (max-width: ${window?.breakpoints?.compact ?? 600}px) and (orientation: portrait)`
+        )
     }
 
     constructor(properties) {
