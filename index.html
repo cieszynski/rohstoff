@@ -62,16 +62,16 @@
         }
     </script>
     <script type="module">
-        import { App, Element } from '/rohstoff/application.mjs'        
+        import { App, Element } from '/rohstoff/application.mjs'
         import { BasicDialog } from '/rohstoff/containment/BasicDialog.mjs'
         import { FullScreenDialog } from '/rohstoff/containment/FullScreenDialog.mjs'
-        
+
         import { Divider } from '/rohstoff/divider.mjs'
         import { LinearProgressIndicator } from '/rohstoff/communication/LinearProgressIndicator.mjs'
         import { Snackbar } from '/rohstoff/communication/Snackbar.mjs'
         import { Row } from '/rohstoff/layouts/row.mjs'
         import { Column } from '/rohstoff/layouts/column.mjs'
-        import { NavigationBar, NavigationItem,NavigationDivider } from '/rohstoff/navigation/navigationbar.mjs'
+        import { NavigationBar, NavigationItem, NavigationDivider } from '/rohstoff/navigation/navigationbar.mjs'
         import {
             TextButton,
             OutlinedButton,
@@ -93,11 +93,31 @@
             IconButton,
             ToggleIconButton
         } from '/rohstoff/actions/IconButtons.mjs';
-         
+
         const fsd = new FullScreenDialog({
             title: "Headline",
-            child: new FilledButton({
-                label: "test"
+            child: new Column({
+                gap: 8,
+                children: [
+                    new FilledButton({
+                        label: "test"
+                    }),
+                    new FilledButton({
+                        label: "test"
+                    }),
+                    new FilledButton({
+                        label: "test"
+                    }),
+                    new FilledButton({
+                        label: "test"
+                    }),
+                    new FilledButton({
+                        label: "test"
+                    }),
+                    new FilledButton({
+                        label: "test"
+                    }),
+                ]
             }),
             id: "testid"
         })
@@ -142,14 +162,14 @@
                     new TextButton({
                         icon: "\ue88a",
                         label: "Snackbar",
-                        onclick: (e)=>{
+                        onclick: (e) => {
                             sbar.show(8000)
                         }
                     }),
                     new OutlinedButton({
                         icon: "\ue88b",
                         label: "FullScreenDialog",
-                        onclick: (e)=>{
+                        onclick: (e) => {
                             fsd.show()
                         }
                     }),

@@ -6,7 +6,14 @@ export class FullScreenDialog extends Component {
     static #css = `
     dialog.fullscreen {
         border: 0;
+        overflow: hidden;
         padding: 0 24rem 16rem 24rem;
+        border-radius: 0;
+    }
+
+    dialog.fullscreen[open] {
+        display: flex;
+        flex-direction: column;
     }
 
     dialog.fullscreen header {
@@ -41,7 +48,7 @@ export class FullScreenDialog extends Component {
         align-items: center;
     }
 
-    @media /* Fullscreen */
+    @media /* Basic */
     (max-height: ${window?.breakpoints?.compact ?? 600}px) and (orientation: landscape),
     (max-width: ${window?.breakpoints?.compact ?? 600}px) and (orientation: portrait) {
 
@@ -78,7 +85,7 @@ export class FullScreenDialog extends Component {
     }
 
 
-    @media /* Basic */
+    @media /* Fullscreen */
     (min-height: ${window?.breakpoints?.compact ?? 600}px) and (orientation: landscape),
     (min-width: ${window?.breakpoints?.compact ?? 600}px) and (orientation: portrait) {
 
@@ -88,12 +95,6 @@ export class FullScreenDialog extends Component {
             max-width: 560rem;
             margin: auto;
         }
-
-        dialog.fullscreen header {
-            
-        }
-
-
 
         dialog.fullscreen header button.close {
             right: 0;
@@ -179,7 +180,23 @@ export class FullScreenDialog extends Component {
                     fill: "forwards"
                 })
         } else {
-
+            this.node.animate([
+                {
+                    transform: "translateY(-56rem)",
+                    clipPath: "inset(0 0 100% 0 round 16rem)",
+                    opacity: 0
+                },
+                { 
+                    transform: "translateY(-0%)",
+                    clipPath: "inset(0 round 16rem)",
+                    opacity: 1
+                }
+            ],
+                {
+                    easing: "ease-in-out",
+                    duration: 300,
+                    fill: "forwards"
+                });
         }
     }
 
@@ -197,7 +214,25 @@ export class FullScreenDialog extends Component {
                     this.node.close();
                 })
         } else {
-            this.node.close() /* TODO */
+            this.node.animate([
+                { 
+                    transform: "translateY(-0%)",
+                    clipPath: "inset(0 round 16rem)",
+                    opacity: 1
+                },
+                {
+                    transform: "translateY(-56rem)",
+                    clipPath: "inset(0 0 100% 0 round 16rem)",
+                    opacity: 0
+                }
+            ],
+                {
+                    easing: "ease-in-out",
+                    duration: 300,
+                    fill: "forwards"
+                }).finished.then(() => {
+                    this.node.close();
+                });
         }
     }
 }

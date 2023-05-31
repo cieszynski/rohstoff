@@ -9,7 +9,7 @@ export class Snackbar extends Element {
         width: fit-content;
         max-width: 90vw;
         margin: auto;
-        display: flex;
+        /* display: flex; */
         gap: 16rem;
         border: 0;
         border-radius: 4rem;
@@ -22,6 +22,10 @@ export class Snackbar extends Element {
         z-index: 1000;
         padding: 16rem;
         opacity: 0;
+    }
+    
+    dialog.snackbar[open] {
+        display: flex;
     }
 
     dialog.snackbar p {
