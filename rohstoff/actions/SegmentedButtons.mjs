@@ -205,5 +205,5 @@ export class ButtonSegment extends Element {
 
     set disabled(bool) { this.node.firstElementChild.disabled = bool; }
 
-    onclick(e) { console.log(e) }
+    onclick(e) { console.debug(e) }
 }

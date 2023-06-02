@@ -93,6 +93,7 @@
             IconButton,
             ToggleIconButton
         } from '/rohstoff/actions/IconButtons.mjs';
+        import { Checkbox } from '/rohstoff/selection/Checkbox.mjs';
 
         const fsd = new FullScreenDialog({
             title: "Headline",
@@ -152,6 +153,18 @@
                 d.show()
             }
         })
+
+        const cbindeterminate =
+            new Checkbox({
+                label: 'Checkbox indeterminate',
+                indeterminate: true,
+                onclick: function (e) {
+                    console.log(this.checked)
+                }
+            })
+
+
+
         const app = new App({
             child: new Column({
                 gap: 18,
@@ -159,6 +172,32 @@
                 children: [
                     sbar,
                     b,
+                    new Column({
+                        children: [
+                            cbindeterminate,
+                            new Checkbox({
+                                label: 'Checkbox checked',
+                                checked: true
+                            }),
+                            new Checkbox({
+                                label: 'Checkbox required',
+                                required: true,
+                                onclick: function (e) {
+                                    console.log(this.valueMissing)
+                                }
+                            }),
+                            new Checkbox({
+                                label: 'Checkbox disabled',
+                                disabled: true,
+                            }),
+                            new Checkbox({
+                                label: 'Checkbox disabled checked',
+                                disabled: true,
+                                checked: true
+                            })
+                        ]
+                    }),
+                    new Divider(),
                     new TextButton({
                         icon: "\ue88a",
                         label: "Snackbar",
