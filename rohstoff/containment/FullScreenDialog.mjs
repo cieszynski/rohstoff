@@ -8,17 +8,11 @@ export class FullScreenDialog extends Component {
         border: 0;
         overflow: hidden;
         padding: 0 24rem 16rem 24rem;
-        border-radius: 0;
-    }
-
-    dialog.fullscreen[open] {
-        display: flex;
-        flex-direction: column;
     }
 
     dialog.fullscreen header {
         height: 56rem;
-        margin: auto -24rem 24rem -24rem;
+        margin: auto -24rem 0rem -24rem;
         display: flex;
         align-items: center;
         position: relative;
@@ -46,9 +40,10 @@ export class FullScreenDialog extends Component {
     dialog.fullscreen footer {
         display: flex;
         align-items: center;
+        height: 56rem;
     }
 
-    @media /* Basic */
+    @media /* Fullscreen */
     (max-height: ${window?.breakpoints?.compact ?? 600}px) and (orientation: landscape),
     (max-width: ${window?.breakpoints?.compact ?? 600}px) and (orientation: portrait) {
 
@@ -57,6 +52,12 @@ export class FullScreenDialog extends Component {
             height: 100vh;
             max-width: 100%; /* overwrite user agent style! */
             max-height: 100%; /* overwrite user agent style! */
+            border-radius: 0;
+        }
+
+        dialog.fullscreen[open] {
+            display: flex;
+            flex-direction: column;
         }
 
         dialog.fullscreen header h1 {
@@ -85,7 +86,7 @@ export class FullScreenDialog extends Component {
     }
 
 
-    @media /* Fullscreen */
+    @media /* Basic */
     (min-height: ${window?.breakpoints?.compact ?? 600}px) and (orientation: landscape),
     (min-width: ${window?.breakpoints?.compact ?? 600}px) and (orientation: portrait) {
 
@@ -94,6 +95,10 @@ export class FullScreenDialog extends Component {
             min-width: 280rem;
             max-width: 560rem;
             margin: auto;
+        }
+
+        dialog.fullscreen header+*{
+            max-height: 400rem;
         }
 
         dialog.fullscreen header button.close {
@@ -109,7 +114,7 @@ export class FullScreenDialog extends Component {
         }
 
         dialog.fullscreen footer {
-            margin: 24rem -16rem auto auto;
+            margin: 0rem -16rem auto auto;
             justify-content: end;
         }
     }
