@@ -94,7 +94,7 @@
             ToggleIconButton
         } from '/rohstoff/actions/IconButtons.mjs';
         import { Checkbox } from '/rohstoff/selection/Checkbox.mjs';
-
+        import { Radiobutton } from '/rohstoff/selection/Radiobutton.mjs';
         const fsd = new FullScreenDialog({
             title: "Headline",
             child: new Column({
@@ -185,11 +185,36 @@
 
         const app = new App({
             child: new Column({
+                paddingLeft: 16,
+                paddingRight: 16,
                 gap: 18,
                 align: { /* verticaly: 'center',  horizontaly: 'center' */ },
                 children: [
-                    sbar,
-                    b,
+                    new Column({
+                        children: [
+                            new Radiobutton({
+                                label: 'Radiobutton checked',
+                                group: 'a',
+                                checked: true
+                            }),
+                            new Radiobutton({
+                                label: 'Radiobutton',
+                                group: 'a'
+                            }),
+                            new Radiobutton({
+                                label: 'Radiobutton disabled',
+                                disabled: true,
+                                group: 'a'
+                            }),
+                            new Radiobutton({
+                                label: 'Radiobutton checked disabled',
+                                disabled: true,
+                                group: 'a',
+                                checked: true
+                            })
+                        ]
+                    }),
+                    new Divider(),
                     new Column({
                         children: [
                             cbindeterminate,
@@ -216,6 +241,7 @@
                         ]
                     }),
                     new Divider(),
+                    b,
                     new TextButton({
                         icon: "\ue88a",
                         label: "Snackbar",

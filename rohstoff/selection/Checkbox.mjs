@@ -2,6 +2,11 @@ import { Element } from '/rohstoff/application.mjs'
 
 export class Checkbox extends Element {
 
+    /* 
+    e909    indeterminate
+    e834    checked
+    e835    unchecked
+    */
     static #css = `
     label.checkbox {
         display: flex;

@@ -1,6 +1,6 @@
-import { App, Element } from '/rohstoff/application.mjs'
+import { App, Element, Component } from '/rohstoff/application.mjs'
 
-export class Snackbar extends Element {
+export class Snackbar extends Component/* Element */ {
 
     static #css = `
     dialog.snackbar {
@@ -45,9 +45,16 @@ export class Snackbar extends Element {
 
     constructor(properties) {
         properties.action = properties.action || "OK"
-        super(properties, 'dialog', 'p', 'button');
 
-        this.node.className = 'snackbar'
+        super(properties, "beforeend", `
+            <dialog class="snackbar">
+                <p></p>
+                <button></button>
+            </dialog>
+        `);
+/*         super(properties, 'dialog', 'p', 'button');
+
+        this.node.className = 'snackbar' */
         this.node.lastElementChild.onclick = (e) => {
             this.onclick(e);
         }
@@ -66,8 +73,14 @@ export class Snackbar extends Element {
         // the bottom of the container
         /* TODO: What about FAB? */
         const reposition = (e) => {
-            this.node.style.bottom
-                = `${window.innerHeight - this.node.parentNode.offsetHeight + 16}rem`;
+            //this.node.style.bottom
+            //    = `${window.innerHeight - this.node.parentNode.offsetHeight + 16}rem`;
+            //console.log(App.observer.isCompact)
+            if(App.observer.isCompact.matches) {
+                this.node.style.bottom = '112rem';
+            } else {
+                this.node.style.bottom = '16rem';
+            }
         }
 
         App.observer.orientation.addEventListener("change", reposition);
