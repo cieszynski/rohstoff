@@ -36,57 +36,43 @@ export class Checkbox extends Element {
     }
 
     label.checkbox input::after {
-        background-clip: content-box; /*  */
         position: absolute;
-        top: 12rem;
-        left: 12rem;
-        width: 16rem;
-        height: 16rem;
-        font-family: Icons;
-        font-weight: 900;
-        font-size: 12rem;
-        content: "";
-        border-style: solid;
-        border-width: 2rem;
-        border-color: rgba(var(--color-on-surface), 1);
-        border-radius: 2rem;
+        top: 0;
+        left: 0;
+        width: 40rem;
+        height: 40rem;
         display: inline-flex;
+        justify-content: center;
         align-items: center;
+        font-family: Icons;
+        font-weight: 500;
+        font-size: 22rem;
+        content: "\\e835";
     }
 
     label.checkbox input:indeterminate::after {
-        color: rgba(var(--color-on-primary), 1);
-        border-color: rgba(var(--color-primary), 1);
-        background-color: rgba(var(--color-primary), 1);
-        content: "\\e15b";
+        content: "\\e909";
+        color: rgba(var(--color-primary), 1);
     }
 
     label.checkbox input:checked::after {
-        color: rgba(var(--color-on-primary), 1);
-        border-color: rgba(var(--color-primary), 1);
-        background-color: rgba(var(--color-primary), 1);
-        content: "\\e5ca";
+        content: "\\e834";
+        color: rgba(var(--color-primary), 1);
     }
 
+    label.checkbox input:required:not(:checked,:disabled)::after,
     label.checkbox input:required:not(:checked,:disabled)+span {
         color: rgba(var(--color-error), 1);
-    }
-
-    label.checkbox input:required:not(:checked,:disabled)::after {
-        border-color: rgba(var(--color-error), 1);
     }
 
     label.checkbox input:disabled+span {
         color: rgba(var(--color-on-surface), .38);
     }
 
-    label.checkbox input:disabled::after {
-        border-color: rgba(var(--color-on-surface), .38);
-    }
-
+    label.checkbox input:disabled::after,
     label.checkbox input:disabled:checked::after,
-    label.checkbox input:disabled:indeterminate::after {
-        background-color: rgba(var(--color-on-surface), .38);
+    label.checkbox input:disabled:indeterminate::after  {
+        color: rgba(var(--color-on-surface), .38);
     }
 
     /* HOVERED, UNSELECTED */
