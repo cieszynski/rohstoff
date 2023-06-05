@@ -95,6 +95,8 @@
         } from '/rohstoff/actions/IconButtons.mjs';
         import { Checkbox } from '/rohstoff/selection/Checkbox.mjs';
         import { Radiobutton } from '/rohstoff/selection/Radiobutton.mjs';
+        import { Switch } from '/rohstoff/selection/Switch.mjs';
+
         const fsd = new FullScreenDialog({
             title: "Headline",
             child: new Column({
@@ -192,6 +194,11 @@
                 children: [
                     new Column({
                         children: [
+                            new Switch({
+                                iconChecked: "\ue876",
+                                //iconUnchecked: "\ue5cd"
+                            }),
+                            new Divider(),
                             new Radiobutton({
                                 label: 'Radiobutton checked',
                                 group: 'a',
