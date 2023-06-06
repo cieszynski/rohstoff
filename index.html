@@ -102,8 +102,10 @@
             child: new Column({
                 gap: 8,
                 children: [
-                    new FilledButton({
-                        label: "test"
+                    new Switch({
+                        iconChecked: "\ue876",
+                        label: "Was zum schaltem",
+                        sublabel: "sublabel ein unnötig langer Text in dieser Kiste und nichts besonderes passiert!",
                     }),
                     new FilledButton({
                         label: "test"
@@ -196,7 +198,17 @@
                         children: [
                             new Switch({
                                 iconChecked: "\ue876",
-                                //iconUnchecked: "\ue5cd"
+                                label: "Was zum schaltem",
+                                sublabel: "sublabel ein unnötig langer Text in dieser Kiste und nichts besonderes passiert!",
+                            }),
+                            new Switch({
+                                iconChecked: "\ue876",
+                                label: "Was zum schaltem, checked",
+                                checked: true,
+                                //sublabel: "sublabel ein unnötig langer Text in dieser Kiste und nichts besonderes passiert!",
+                                onclick: function (e) {
+                                    this.sublabel = this.node.firstElementChild.checked
+                                }
                             }),
                             new Divider(),
                             new Radiobutton({

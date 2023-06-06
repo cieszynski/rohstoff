@@ -2,17 +2,36 @@ import { Element } from '/rohstoff/application.mjs'
 
 export class Switch extends Element {
 
-/* 
-    iconChecked: "\ue876",
-    iconUnchecked: "\ue5cd"
-*/
+    /* 
+        iconChecked: "\ue876",
+        iconUnchecked: "\ue5cd"
+    */
     static #css = `
     label.switch {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 16rem;
+        align-items: center;
         margin: 4rem auto;
         position: relative;
         width: 100%;
     }
 
+    label.switch span {
+        font-family: Medium;
+        display: block;
+        flex: 1;
+    }
+
+    label.switch span span:first-of-type {
+        font-weight: 500;
+        font-size: 14rem;
+    }
+
+    label.switch span span:last-of-type {
+        font-weight: 400;
+        font-size: 12rem;
+    }
 
     label.switch input {
         appearance: none;
@@ -126,7 +145,7 @@ export class Switch extends Element {
 
     constructor(properties) {
 
-        super(properties, 'label', 'input', 'span');
+        super(properties, 'label', 'input', ['span', 'span', 'span']);
 
         this.node.classList.add('switch');
         this.node.firstElementChild.type = 'checkbox'
@@ -135,12 +154,18 @@ export class Switch extends Element {
         }
     }
 
+    set checked(bool) { this.node.firstElementChild.checked = bool; }
+
     set iconChecked(str) { this.node.firstElementChild.dataset.iconChecked = str; }
 
-    set iconUnchecked(str) { 
+    set iconUnchecked(str) {
         this.node.firstElementChild.dataset.iconUnchecked = str;
         this.node.firstElementChild.classList.toggle('icon', Boolean(str))
     }
+
+    set label(str) { this.node.lastElementChild.firstElementChild.textContent = str; }
+
+    set sublabel(str) { this.node.lastElementChild.lastElementChild.textContent = str; }
 
     onclick(e) { console.debug(e) }
 }
