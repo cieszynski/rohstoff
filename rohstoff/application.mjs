@@ -74,8 +74,16 @@ export class Element extends Base {
             return node;
         }
 
-        this.node = create(...elements);
-
+        if(!!properties.html) {
+            this.node = Object.assign(
+                document.createElement(properties.html.element), {
+                className: properties.html.className, 
+                innerHTML: properties.html.innerHTML
+            })
+            delete properties.html;
+        } else {
+            this.node = create(...elements);
+        }
         // Ensure reading arrays first
         Object
             .entries(properties)

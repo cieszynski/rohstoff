@@ -6,6 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="stylesheet" href="/rohstoff/typescale.css" as="style" type="text/css">
+
     <link rel="preload" href="/fonts/materialiconsoutlined-regular-webfont.woff2" as="font" type="font/woff2"
         crossorigin>
     <link rel="preload" href="/fonts/materialicons-regular-webfont.woff2" as="font" type="font/woff2" crossorigin>
@@ -29,22 +31,37 @@
             font-display: swap;
         }
 
-        @font-face {
-            font-family: "Regular";
-            font-style: normal;
-            font-weight: 400;
-            src: local('sans-serif'), url("/fonts/roboto-regular-webfont.woff2") format('woff2');
-            font-display: swap;
-        }
+@font-face {
+    font-family: "Regular";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/fonts/roboto-regular-webfont.woff2") format('woff2');
+    font-display: swap;
+}
 
-        @font-face {
-            font-family: "Medium";
-            font-style: normal;
-            font-weight: 400;
-            src: local('sans-serif'), url("/fonts/roboto-medium-webfont.woff2") format('woff2');
-            font-display: swap;
-        }
+@font-face {
+    font-family: "Medium";
+    font-style: normal;
+    font-weight: 500;
+    src: url("/fonts/roboto-medium-webfont.woff2") format('woff2');
+    font-display: swap;
+}
 
+/*  */
+
+        :root {
+            --typeface-brand: Roboto;
+            --typeface-plain: Roboto;
+
+
+            --typescale-label-large: 500 14rem/20rem var(--typeface-plain);
+            --typescale-label-large: 500 12rem/16rem var(--typeface-plain);
+            --typescale-label-large: 500 11rem/16rem var(--typeface-plain);
+
+            --typescale-body-large: 400 16rem/24rem var(--typeface-plain);
+            --typescale-body-medium: 400 14rem/20rem var(--typeface-plain);
+            --typescale-body-small: 400 12rem/16rem var(--typeface-plain);
+        }
         #testid {
             background-color: #fff;
         }

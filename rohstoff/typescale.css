@@ -1,0 +1,128 @@
+@font-face {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/fonts/roboto-regular-webfont.woff2") format('woff2');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 500;
+    src: url("/fonts/roboto-medium-webfont.woff2") format('woff2');
+    font-display: swap;
+}
+
+.typeface-brand {
+    font-family: Roboto;
+}
+
+.typeface-plain {
+    font-family: Roboto;
+}
+
+.typescale-display-large {
+    font-weight: 400;
+    font-size: 57rem;
+    line-height: 64rem;
+    letter-spacing: -0.25rem;
+}
+
+.typescale-display-medium {
+    font-weight: 400;
+    font-size: 45rem;
+    line-height: 52rem;
+    letter-spacing: 0;
+}
+
+.typescale-display-small {
+    font-weight: 400;
+    font-size: 36rem;
+    line-height: 44rem;
+    letter-spacing: 0;
+}
+
+.typescale-headline-large {
+    font-weight: 400;
+    font-size: 32rem;
+    line-height: 40rem;
+    letter-spacing: 0;
+}
+
+.typescale-headline-medium {
+    font-weight: 400;
+    font-size: 28rem;
+    line-height: 36rem;
+    letter-spacing: 0;
+}
+
+.typescale-headline-small {
+    font-weight: 400;
+    font-size: 24rem;
+    line-height: 32rem;
+    letter-spacing: 0;
+}
+
+.typescale-title-large {
+    font-weight: 400;
+    font-size: 22rem;
+    line-height: 28rem;
+    letter-spacing: 0;
+}
+
+.typescale-title-medium {
+    font-weight: 500;
+    font-size: 16rem;
+    line-height: 24rem;
+    letter-spacing: .15rem;
+}
+
+.typescale-title-small {
+    font-weight: 500;
+    font-size: 14rem;
+    line-height: 20rem;
+    letter-spacing: .1;
+}
+
+.typescale-label-large {
+    font-weight: 500;
+    font-size: 14rem;
+    line-height: 20rem;
+    letter-spacing: .1rem;
+}
+
+.typescale-label-medium {
+    font-weight: 500;
+    font-size: 12rem;
+    line-height: 16rem;
+    letter-spacing: .5rem;
+}
+
+.typescale-label-small {
+    font-weight: 500;
+    font-size: 11rem;
+    line-height: 16rem;
+    letter-spacing: .5rem;
+}
+
+.typescale-body-large {
+    font-weight: 400;
+    font-size: 16rem;
+    line-height: 24rem;
+    letter-spacing: .5rem;
+}
+
+.typescale-body-medium {
+    font-weight: 400;
+    font-size: 14rem;
+    line-height: 20rem;
+    letter-spacing: .25rem;
+}
+
+.typescale-body-small {
+    font-weight: 400;
+    font-size: 12rem;
+    line-height: 16rem;
+    letter-spacing: .4rem;
+}

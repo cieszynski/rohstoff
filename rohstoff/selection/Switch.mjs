@@ -18,19 +18,20 @@ export class Switch extends Element {
     }
 
     label.switch span {
-        font-family: Medium;
+        color: rgba(var(--color-on-surface), 1);
+       /*  font-family: Roboto; */
         display: block;
         flex: 1;
     }
 
     label.switch span span:first-of-type {
-        font-weight: 500;
-        font-size: 14rem;
+     /*    font-weight: 500;
+        font-size: 14rem; */
     }
 
     label.switch span span:last-of-type {
-        font-weight: 400;
-        font-size: 12rem;
+  /*       font: var(--typescale-body-small);
+        letter-spacing: .4rem; */
     }
 
     label.switch input {
@@ -139,16 +140,43 @@ export class Switch extends Element {
             left .15s,
             top .15s;
     }
+
+    /* DISABLED */
+    label.switch input:disabled+span {
+        color: rgba(var(--color-on-surface), .38);
+    }
     `
 
     static { super.initonce(this.#css) }
 
     constructor(properties) {
 
-        super(properties, 'label', 'input', ['span', 'span', 'span']);
+        //super(properties, 'label', 'input', ['span', 'span', 'span']);
+        properties.html = {
+            element: 'label',
+            className: 'switch',
+            innerHTML: `
+                <input type="checkbox"/>
+                <span>
+                    <span class="typeface-plain typescale-label-large"></span>
+                    <span class="typeface-plain typescale-body-small"></span>
+                </span>`
+        }
 
-        this.node.classList.add('switch');
-        this.node.firstElementChild.type = 'checkbox'
+        /* TODO:
+            super(properties, {
+                nodeName: 'label',
+                className: 'switch other',
+                innerHTML: `
+                <input type="checkbox"/>
+                <span>
+                ...
+                </span>
+                `
+            }
+        */
+        super(properties, 'label');
+
         this.node.firstElementChild.onclick = (e) => {
             this.onclick.call(this, e);
         }
